@@ -4,5 +4,8 @@
     <string name="app_name">secu3_blueloger</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="button_connect">Connect</string>
+    <string name="onStartMessage">Application is started Secsfull!</string>
+    
 
 </resources>
