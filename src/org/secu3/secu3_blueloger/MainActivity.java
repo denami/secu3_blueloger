@@ -88,28 +88,27 @@ public class MainActivity extends Activity {
 	    	public void handleMessage(android.os.Message msg) {
 	    		switch (msg.what) {
 	            case RECIEVE_MESSAGE:													// if receive massage / если приняли сообщение в Handler
-	            	byte[] readBuf = (byte[]) msg.obj;
-	            	String strIncom = new String(readBuf, 0, msg.arg1);					// create string from bytes array / Создаем строку из байт в буфере
-	            	sb.append(strIncom);												// append string  / формируем строку 
-	            	int endOfLineIndex = sb.indexOf("@");								// determine the end-of-line / определяем символ конца строки 
-	            	if (endOfLineIndex > 0) { 											// if end-of-line,  / если встречаем конец строки,
-	            		String sbprint = sb.substring(0, endOfLineIndex);				// extract string / то извлекаем строку
-	                    sb.delete(0, sb.length());										// and clear / и очищаем sb
-	                	txtLod.setText(sbprint); 	       								// update TextView / Обновляем TextView с логом
+	            	
+	            	//byte[] readBuf = (byte[]) msg.obj;
+	            	//String strIncom = new String(readBuf, 0, msg.arg1);					// create string from bytes array / Создаем строку из байт в буфере
+	            	String strIncom = (String)msg.obj;
+	            	//sb.append(strIncom);												// append string  / формируем строку 
+	            	//int endOfLineIndex = sb.indexOf("\r");								// determine the end-of-line / определяем символ конца строки 
+	            	//if (endOfLineIndex > 0) { 											// if end-of-line,  / если встречаем конец строки,
+	            	//	String sbprint = sb.substring(0, endOfLineIndex);				// extract string / то извлекаем строку
+	                //    sb.delete(0, sb.length());										// and clear / и очищаем sb
+	                //	txtLod.setText(sbprint); 	       								// update TextView / Обновляем TextView с логом
 	                	//btnConnect.setEnabled(true); 
 	                	
-	                }
+	            	txtLod.setText(strIncom);
 	            	//Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
-	            	Log.d(TAG, "...Byte:" + msg.arg1 + "...");
-	            	if (sb.length()>25) {
-	            		sb.delete(0, sb.length());										// and clear / и очищаем sb
-	            	}
+	            	//Log.d(TAG, "...Byte:" + msg.arg1 + "...");
 	            	break;
 	    		}
-	        };
-		};
-		btAdapter = BluetoothAdapter.getDefaultAdapter();								// get Bluetooth adapter / получаем локальный Bluetooth адаптер
-		checkBTState();																	// Check Bluetooth / Проверяем наличие Bluetooth адаптера
+	    	}
+	    };
+	    btAdapter = BluetoothAdapter.getDefaultAdapter();								// get Bluetooth adapter / получаем локальный Bluetooth адаптер
+	    checkBTState();																	// Check Bluetooth / Проверяем наличие Bluetooth адаптера
 	}
 
 	@Override  
@@ -190,6 +189,7 @@ public class MainActivity extends Activity {
 	private class ConnectedThread extends Thread {
 		private final InputStream mmInStream;
 		private final OutputStream mmOutStream;    
+		private StringBuilder sbInThread = new StringBuilder(); // StringBuilder для отправки TextView
 		public ConnectedThread(BluetoothSocket socket) {
 			InputStream tmpIn = null;
 			OutputStream tmpOut = null;
@@ -206,12 +206,25 @@ public class MainActivity extends Activity {
 		public void run() {
 			byte[] buffer = new byte[256];  // buffer store for the stream
 			int bytes; // bytes returned from read()
+			
+			
 			// Keep listening to the InputStream until an exception occurs
 			while (true) {
 				try {
 					// Read from the InputStrea
 					bytes = mmInStream.read(buffer);		// Get number of bytes and message in "buffer"
-					h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();		// Send to message queue Handler     
+					String strIncom = new String(buffer ,0, bytes);					// create string from bytes array / Создаем строку из байт в буфере
+					sbInThread.append(strIncom);
+					int endOfLineIndex = strIncom.indexOf("\r");
+					if (endOfLineIndex > 0) {
+						String toSend =  (String) sbInThread.subSequence(0, endOfLineIndex);
+						sbInThread.delete(0, endOfLineIndex);
+						h.obtainMessage(RECIEVE_MESSAGE, toSend).sendToTarget();
+					}
+					//else { 
+					//	h.obtainMessage(RECIEVE_MESSAGE, sbInThread);
+					//}
+//h.obtainMessage(RECIEVE_MESSAGE, sbInThread, -1, buffer).sendToTarget();		// Send to message queue Handler     
 				} catch (IOException e) {
 					break;
 				}  
