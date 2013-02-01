@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import android.os.Build;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressLint("HandlerLeak")
 public class MainActivity extends Activity {
 	private static final String TAG = "secu3_blueloger";
 	//Кнопка для очистки
@@ -50,7 +52,7 @@ public class MainActivity extends Activity {
 	private ConnectedThread mConnectedThread;
 		
 	
-	private StringBuilder sb = new StringBuilder();
+	//private StringBuilder sb = new StringBuilder();
 
 
 	  
@@ -100,7 +102,13 @@ public class MainActivity extends Activity {
 	                //	txtLod.setText(sbprint); 	       								// update TextView / Обновляем TextView с логом
 	                	//btnConnect.setEnabled(true); 
 	                	
-	            	txtLod.setText(strIncom);
+	            	//String[] tmp = strIncom.split("\r");
+	            	
+	            	//for ( int i = 0 ; i < tmp.length ; i++ ) {
+	            		//txtLod.setText(tmp[i]);
+	            		txtLod.setText(strIncom);
+	            	//}
+	            	
 	            	//Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
 	            	//Log.d(TAG, "...Byte:" + msg.arg1 + "...");
 	            	break;
@@ -207,19 +215,23 @@ public class MainActivity extends Activity {
 			byte[] buffer = new byte[256];  // buffer store for the stream
 			int bytes; // bytes returned from read()
 			
-			
 			// Keep listening to the InputStream until an exception occurs
 			while (true) {
 				try {
 					// Read from the InputStrea
 					bytes = mmInStream.read(buffer);		// Get number of bytes and message in "buffer"
 					String strIncom = new String(buffer ,0, bytes);					// create string from bytes array / Создаем строку из байт в буфере
+					
 					sbInThread.append(strIncom);
 					int endOfLineIndex = strIncom.indexOf("\r");
 					if (endOfLineIndex > 0) {
-						String toSend =  (String) sbInThread.subSequence(0, endOfLineIndex);
-						sbInThread.delete(0, endOfLineIndex);
-						h.obtainMessage(RECIEVE_MESSAGE, toSend).sendToTarget();
+						String[] tmp = sbInThread.toString().split("\r");
+						for ( int i = 0 ; i < tmp.length ; i++ ) {
+							//String toSend =  (String) sbInThread.subSequence(0, endOfLineIndex);
+							String toSend = tmp[i];
+							//sbInThread.delete(0, endOfLineIndex);
+							h.obtainMessage(RECIEVE_MESSAGE, toSend).sendToTarget();
+		            	}
 					}
 					//else { 
 					//	h.obtainMessage(RECIEVE_MESSAGE, sbInThread);
