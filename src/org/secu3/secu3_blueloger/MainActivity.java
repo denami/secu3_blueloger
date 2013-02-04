@@ -214,35 +214,57 @@ public class MainActivity extends Activity {
 		public void run() {
 			byte[] buffer = new byte[256];  // buffer store for the stream
 			int bytes; // bytes returned from read()
+			ArrayList<String> resultingList = new ArrayList<String>();
+			String container;
 			
 			// Keep listening to the InputStream until an exception occurs
 			while (true) {
 				try {
 					// Read from the InputStrea
 					bytes = mmInStream.read(buffer);		// Get number of bytes and message in "buffer"
-					String strIncom = new String(buffer ,0, bytes);					// create string from bytes array / Создаем строку из байт в буфере
-					
-					sbInThread.append(strIncom);
-					int endOfLineIndex = strIncom.indexOf("\r");
-					if (endOfLineIndex > 0) {
-						String[] tmp = sbInThread.toString().split("\r");
-						for ( int i = 0 ; i < tmp.length ; i++ ) {
-							//String toSend =  (String) sbInThread.subSequence(0, endOfLineIndex);
-							String toSend = tmp[i];
-							//sbInThread.delete(0, endOfLineIndex);
-							h.obtainMessage(RECIEVE_MESSAGE, toSend).sendToTarget();
-		            	}
+					//String strIncom = new String(buffer ,0, bytes);					// create string from bytes array / Создаем строку из байт в буфере
+					for (int i = 0; i < bytes; i++) {
+						
+						//Log.d(TAG, "Buffer elemrnt: "+i+"-"+buffer[i]);
+						if (buffer[i]==13) {
+							Log.d(TAG, "New message");
+							resultingList.add(sbInThread.toString());
+							
+						}
+						else {
+							String strIncom = new String(buffer ,0, i);					// create string from bytes array / Создаем строку из байт в буфере
+							sbInThread.append(strIncom);
+							container= new String(buffer, i , bytes);
+						}
+						byte[] t = new byte [1];
+						t[0]=buffer[i];
+						Log.d(TAG, new String(t));
+						
 					}
+					for (String strToPush: resultingList) {
+						h.obtainMessage(RECIEVE_MESSAGE, strToPush).sendToTarget();
+					}
+					
+					//sbInThread.append(strIncom);
+					//int endOfLineIndex = strIncom.indexOf("\r");
+					//if (endOfLineIndex > 0) {
+					//	String[] tmp = sbInThread.toString().split("\r");
+					//	for ( int i = 0 ; i < tmp.length ; i++ ) {
+							//String toSend =  (String) sbInThread.subSequence(0, endOfLineIndex);
+					//		String toSend = tmp[i];
+							//sbInThread.delete(0, endOfLineIndex);
+							
+		            //	}
+					//}
 					//else { 
 					//	h.obtainMessage(RECIEVE_MESSAGE, sbInThread);
 					//}
 //h.obtainMessage(RECIEVE_MESSAGE, sbInThread, -1, buffer).sendToTarget();		// Send to message queue Handler     
 				} catch (IOException e) {
 					break;
-				}  
-			}    
+				}    
+			}
 		}
-		   
 		/* Call this from the main activity to send data to the remote device */
 		public void write(String message) {
 			Log.d(TAG, "...Data to send: " + message + "...");
