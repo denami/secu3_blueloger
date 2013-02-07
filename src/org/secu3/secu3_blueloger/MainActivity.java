@@ -1,10 +1,14 @@
 package org.secu3.secu3_blueloger;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.RandomAccessFile;
+import java.io.Writer;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -156,6 +160,7 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "...Создание Socket...");
 		mConnectedThread = new ConnectedThread(btSocket);
 		mConnectedThread.start();
+		
 	}
 	 
 	private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
@@ -217,6 +222,8 @@ public class MainActivity extends Activity {
 		File toLogFile = new File ("/sdcard/test.log");
 		
 		
+		
+		
 		public void run() {
 			byte[] buffer = new byte[256];  // buffer store for the stream
 			int bytes; // bytes returned from read()
@@ -229,6 +236,12 @@ public class MainActivity extends Activity {
 			// Keep listening to the InputStream until an exception occurs
 			while (true) {
 				try {
+					if (!toLogFile.exists()){
+						toLogFile.createNewFile();
+					}
+					
+					FileWriter wrt = new FileWriter(toLogFile, true);
+					
 					// Read from the InputStrea
 					bytes = mmInStream.read(buffer);		// Get number of bytes and message in "buffer"
 					//String strIncom = new String(buffer ,0, bytes);					// create string from bytes array / Создаем строку из байт в буфере
@@ -240,14 +253,8 @@ public class MainActivity extends Activity {
 						if (buffer[i]==13) {
 							Log.d(TAG, "New message");
 							resultingList.add(sbInThread.toString());
-							//Если требуемого файла не существует.
-							if (!toLogFile.equals(toLogFile)) {
-								toLogFile.createNewFile();
-							}
-							PrintWriter pwInput = new PrintWriter(toLogFile);
-							pwInput.print(sbInThread.toString());
 							sbInThread = new StringBuilder(); 
-							pwInput.close();
+							
 						}
 						//else {
 						//	String strIncom = new String(buffer ,0, i);					// create string from bytes array / Создаем строку из байт в буфере
@@ -261,9 +268,15 @@ public class MainActivity extends Activity {
 					}
 					
 					for (String strToPush: resultingList) {
+						wrt.append(strToPush+"\r");
 						h.obtainMessage(RECIEVE_MESSAGE, strToPush).sendToTarget();
+						
+						
+						
 					}
 					resultingList.clear();
+					wrt.flush();
+					wrt.close();
 					
 					//sbInThread.append(strIncom);
 					//int endOfLineIndex = strIncom.indexOf("\r");
