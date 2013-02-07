@@ -1,8 +1,10 @@
 package org.secu3.secu3_blueloger;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -212,13 +214,17 @@ public class MainActivity extends Activity {
 			mmInStream = tmpIn;
 			mmOutStream = tmpOut;    
 		}
-		 
+		File toLogFile = new File ("/sdcard/test.log");
+		
+		
 		public void run() {
 			byte[] buffer = new byte[256];  // buffer store for the stream
 			int bytes; // bytes returned from read()
 			ArrayList<String> resultingList = new ArrayList<String>();
 			String container;
 			byte[] t = new byte [1];
+			
+			
 			
 			// Keep listening to the InputStream until an exception occurs
 			while (true) {
@@ -234,7 +240,14 @@ public class MainActivity extends Activity {
 						if (buffer[i]==13) {
 							Log.d(TAG, "New message");
 							resultingList.add(sbInThread.toString());
+							//Если требуемого файла не существует.
+							if (!toLogFile.equals(toLogFile)) {
+								toLogFile.createNewFile();
+							}
+							PrintWriter pwInput = new PrintWriter(toLogFile);
+							pwInput.print(sbInThread.toString());
 							sbInThread = new StringBuilder(); 
+							pwInput.close();
 						}
 						//else {
 						//	String strIncom = new String(buffer ,0, i);					// create string from bytes array / Создаем строку из байт в буфере
