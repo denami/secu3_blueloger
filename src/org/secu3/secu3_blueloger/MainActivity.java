@@ -3,6 +3,7 @@ package org.secu3.secu3_blueloger;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -111,6 +112,7 @@ public class MainActivity extends Activity {
 	            	
 	            	//Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
 	            	//Log.d(TAG, "...Byte:" + msg.arg1 + "...");
+	            	Log.d(TAG, "...strIncom:" + strIncom + "...");
 	            	break;
 	    		}
 	    	}
@@ -216,6 +218,7 @@ public class MainActivity extends Activity {
 			int bytes; // bytes returned from read()
 			ArrayList<String> resultingList = new ArrayList<String>();
 			String container;
+			byte[] t = new byte [1];
 			
 			// Keep listening to the InputStream until an exception occurs
 			while (true) {
@@ -224,26 +227,30 @@ public class MainActivity extends Activity {
 					bytes = mmInStream.read(buffer);		// Get number of bytes and message in "buffer"
 					//String strIncom = new String(buffer ,0, bytes);					// create string from bytes array / Создаем строку из байт в буфере
 					for (int i = 0; i < bytes; i++) {
-						
+						t[0]=buffer[i];
+						container = new String(t);
 						//Log.d(TAG, "Buffer elemrnt: "+i+"-"+buffer[i]);
+						sbInThread.append(container);
 						if (buffer[i]==13) {
 							Log.d(TAG, "New message");
 							resultingList.add(sbInThread.toString());
-							
+							sbInThread = new StringBuilder(); 
 						}
-						else {
-							String strIncom = new String(buffer ,0, i);					// create string from bytes array / Создаем строку из байт в буфере
-							sbInThread.append(strIncom);
-							container= new String(buffer, i , bytes);
-						}
-						byte[] t = new byte [1];
-						t[0]=buffer[i];
-						Log.d(TAG, new String(t));
+						//else {
+						//	String strIncom = new String(buffer ,0, i);					// create string from bytes array / Создаем строку из байт в буфере
+						//	sbInThread.append(strIncom);
+						//	container= new String(buffer, i , bytes);
+						//}
+						//byte[] t = new byte [1];
+						//t[0]=buffer[i];
+						//Log.d(TAG, new String(t));
 						
 					}
+					
 					for (String strToPush: resultingList) {
 						h.obtainMessage(RECIEVE_MESSAGE, strToPush).sendToTarget();
 					}
+					resultingList.clear();
 					
 					//sbInThread.append(strIncom);
 					//int endOfLineIndex = strIncom.indexOf("\r");
