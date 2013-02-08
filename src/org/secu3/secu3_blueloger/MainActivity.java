@@ -268,7 +268,7 @@ public class MainActivity extends Activity {
 					}
 					
 					for (String strToPush: resultingList) {
-						wrt.append(strToPush+"\r");
+						wrt.append(strToPush);
 						h.obtainMessage(RECIEVE_MESSAGE, strToPush).sendToTarget();
 						
 						
