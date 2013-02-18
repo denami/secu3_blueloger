@@ -1,20 +1,14 @@
 package org.secu3.secu3_blueloger;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.RandomAccessFile;
-import java.io.Writer;
-import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import android.R.menu;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,7 +37,8 @@ public class MainActivity extends Activity {
 	}
 
 	private static final String TAG = "secu3_blueloger";
-	//Кнопка для очистки
+	//clean Button 
+	// Кнопка для очистки
 	Button btnConnect;
 	TextView txtLod;    
 	
@@ -67,11 +62,6 @@ public class MainActivity extends Activity {
 	
 	private ConnectedThread mConnectedThread;
 		
-	
-	//private StringBuilder sb = new StringBuilder();
-
-
-	  
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -106,35 +96,13 @@ public class MainActivity extends Activity {
 	    	public void handleMessage(android.os.Message msg) {
 	    		switch (msg.what) {
 	            case RECIEVE_MESSAGE:													// if receive massage / если приняли сообщение в Handler
-	            	
-	            	//byte[] readBuf = (byte[]) msg.obj;
-	            	//String strIncom = new String(readBuf, 0, msg.arg1);					// create string from bytes array / Создаем строку из байт в буфере
-	            	String strIncom = (String)msg.obj;
-	            	//sb.append(strIncom);												// append string  / формируем строку 
-	            	//int endOfLineIndex = sb.indexOf("\r");								// determine the end-of-line / определяем символ конца строки 
-	            	//if (endOfLineIndex > 0) { 											// if end-of-line,  / если встречаем конец строки,
-	            	//	String sbprint = sb.substring(0, endOfLineIndex);				// extract string / то извлекаем строку
-	                //    sb.delete(0, sb.length());										// and clear / и очищаем sb
-	                //	txtLod.setText(sbprint); 	       								// update TextView / Обновляем TextView с логом
-	                	//btnConnect.setEnabled(true); 
-	                	
-	            	//String[] tmp = strIncom.split("\r");
-	            	
-	            	//for ( int i = 0 ; i < tmp.length ; i++ ) {
-	            		//txtLod.setText(tmp[i]);
-	            		txtLod.setText(strIncom);
-	            	//}
-	            	
-	            	//Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
-	            	//Log.d(TAG, "...Byte:" + msg.arg1 + "...");
+	            	String strIncom = (String)msg.obj;							        // extract string / то извлекаем строку												
+	            	txtLod.setText(strIncom); 	       								// update TextView / Обновляем TextView с логом
 	            	Log.d(TAG, "...strIncom:" + strIncom + "...");
 	            	break;
 	    		}
 	    	}
 	    };
-	    
-	    setProgressBarIndeterminateVisibility(true);
-	    
 	    btAdapter = BluetoothAdapter.getDefaultAdapter();								// get Bluetooth adapter / получаем локальный Bluetooth адаптер
 	    checkBTState();																	// Check Bluetooth / Проверяем наличие Bluetooth адаптера
 	}
@@ -167,12 +135,10 @@ public class MainActivity extends Activity {
 				errorExit("Fatal Error", "In onResume() and unable to close socket during connection failure" + e2.getMessage() + "."); 
 			}    
 		}
-		     
 		// Create a data stream so we can talk to server.
 		Log.d(TAG, "...Создание Socket...");
 		mConnectedThread = new ConnectedThread(btSocket);
 		mConnectedThread.start();
-		
 	}
 	 
 	private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
@@ -189,23 +155,22 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//menu.add(getString(0,1,0,R.string.choseAdaptorButtonText));
-		//menu.add(getString(0,2,0,R.);
-		//menu.add(getString(0,3,0,R.string.exitButtonText));
 		
-		SubMenu AdaptorMenu = menu.addSubMenu(1,4,2,getString(R.string.choseAdaptorButtonText));
+		SubMenu AdaptorMenu = menu.addSubMenu(1,//group
+											  4,//id
+											  2,//order
+											  getString(R.string.choseAdaptorButtonText)); //text
 		AdaptorMenu.add("Dev1");
-		AdaptorMenu.add("dev2");
-
-		menu.add(1, 5, 2, getString(R.string.changePathToLogFile));
-		menu.add(2, 6, 4, getString(R.string.exitButtonText));
+		AdaptorMenu.add("Dev2");
+		menu.add(1, //group
+				 5, //id
+				 2, //order
+				 getString(R.string.changePathToLogFile)); //text
+		menu.add(2,
+				 6,
+				 4,
+				 getString(R.string.exitButtonText));
 		
-		
-		
-		
-		//getMenuInflater().inflate(R.menu.activity_main, menu);
-		//return true;
 	    return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -246,19 +211,16 @@ public class MainActivity extends Activity {
 			mmInStream = tmpIn;
 			mmOutStream = tmpOut;    
 		}
-		File toLogFile = new File ("/sdcard/test.log");
-		
-		
-		
+		File toLogFile = new File (getString(R.string._sdcard_test_log));
 		
 		public void run() {
 			byte[] buffer = new byte[256];  // buffer store for the stream
 			int bytes; // bytes returned from read()
 			ArrayList<String> resultingList = new ArrayList<String>();
 			String container;
-			byte[] t = new byte [1];
-			
-			
+			//Create one element array 
+			// Создание масива из одного байта
+			byte[] t = new byte [1]; 
 			
 			// Keep listening to the InputStream until an exception occurs
 			while (true) {
@@ -266,60 +228,31 @@ public class MainActivity extends Activity {
 					if (!toLogFile.exists()){
 						toLogFile.createNewFile();
 					}
-					
 					FileWriter wrt = new FileWriter(toLogFile, true);
-					
 					// Read from the InputStrea
-					bytes = mmInStream.read(buffer);		// Get number of bytes and message in "buffer"
-					//String strIncom = new String(buffer ,0, bytes);					// create string from bytes array / Создаем строку из байт в буфере
+					bytes = mmInStream.read(buffer);		// Get number of bytes and message in "buffer"					
 					for (int i = 0; i < bytes; i++) {
-						t[0]=buffer[i];
-						container = new String(t);
+						t[0]=buffer[i]; //Set array element from buffer / Устанавливаем заничение элемента значением из buffer 
+						container = new String(t);  // create string from bytes array / Создаем строку из байт в буфере
 						//Log.d(TAG, "Buffer elemrnt: "+i+"-"+buffer[i]);
 						sbInThread.append(container);
-						if (buffer[i]==13) {
-							Log.d(TAG, "New message");
-							resultingList.add(sbInThread.toString());
-							sbInThread = new StringBuilder(); 
-							
+						if (buffer[i]==13) { // determine the end-of-line / определяем символ конца строки
+							// if end-of-line,  
+							// если встречаем конец строки,
+							Log.d(TAG, "New message"); 
+							resultingList.add(sbInThread.toString()); //Add string to ArrayList / Добовляем строку в ArrayList 
+							sbInThread = new StringBuilder(); //clear StringBuilder / и очищаем StringBuilder
 						}
-						//else {
-						//	String strIncom = new String(buffer ,0, i);					// create string from bytes array / Создаем строку из байт в буфере
-						//	sbInThread.append(strIncom);
-						//	container= new String(buffer, i , bytes);
-						//}
-						//byte[] t = new byte [1];
-						//t[0]=buffer[i];
-						//Log.d(TAG, new String(t));
-						
 					}
-					
 					for (String strToPush: resultingList) {
 						wrt.append(strToPush);
-						h.obtainMessage(RECIEVE_MESSAGE, strToPush).sendToTarget();
-						
-						
-						
+						h.obtainMessage(RECIEVE_MESSAGE, strToPush).sendToTarget(); // Send to message queue Handler
 					}
+					//clear ArrayList  
+					//очищаем ArrayList
 					resultingList.clear();
 					wrt.flush();
-					wrt.close();
-					
-					//sbInThread.append(strIncom);
-					//int endOfLineIndex = strIncom.indexOf("\r");
-					//if (endOfLineIndex > 0) {
-					//	String[] tmp = sbInThread.toString().split("\r");
-					//	for ( int i = 0 ; i < tmp.length ; i++ ) {
-							//String toSend =  (String) sbInThread.subSequence(0, endOfLineIndex);
-					//		String toSend = tmp[i];
-							//sbInThread.delete(0, endOfLineIndex);
-							
-		            //	}
-					//}
-					//else { 
-					//	h.obtainMessage(RECIEVE_MESSAGE, sbInThread);
-					//}
-//h.obtainMessage(RECIEVE_MESSAGE, sbInThread, -1, buffer).sendToTarget();		// Send to message queue Handler     
+					wrt.close();     
 				} catch (IOException e) {
 					break;
 				}    
