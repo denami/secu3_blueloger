@@ -8,4 +8,7 @@
      <string name="changePathToLogFile">Выбрать лог файл</string>
      <string name="choseAdaptorButtonText">Выбрать устройство</string>
      
+     <string name="changePathToLogFileApplyButtonText">Применить</string>
+     <string name="changePathToLogFileCommentString">Путь до лог файла:</string>
+     
 </resources>
