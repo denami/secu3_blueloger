@@ -6,6 +6,8 @@
     <string name="menu_settings">Settings</string>
     <string name="button_connect">Connect</string>
     <string name="onStartMessage">Application is started Secsfull!</string>
-    
+    <string name="exitButtonText">Exit</string>
+    <string name="changePathToLogFile">Change log file</string>
+    <string name="choseAdaptorButtonText">Chose devise</string>
 
 </resources>

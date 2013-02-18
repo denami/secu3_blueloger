@@ -3,4 +3,9 @@
      <string name="onStartMessage">Приложение успешно запустилось!</string>
      <string name="button_connect">Соединить</string> 
      <string name="app_name">Bluetooth логер для SECU3</string>
+     <string name="exitButtonText">Выход</string>
+     
+     <string name="changePathToLogFile">Выбрать лог файл</string>
+     <string name="choseAdaptorButtonText">Выбрать устройство</string>
+     
 </resources>

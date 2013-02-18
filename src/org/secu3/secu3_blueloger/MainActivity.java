@@ -14,6 +14,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import android.R.menu;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +26,8 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -33,6 +36,12 @@ import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
 public class MainActivity extends Activity {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT ).show();
+		return super.onOptionsItemSelected(item);
+	}
+
 	private static final String TAG = "secu3_blueloger";
 	//Кнопка для очистки
 	Button btnConnect;
@@ -123,6 +132,9 @@ public class MainActivity extends Activity {
 	    		}
 	    	}
 	    };
+	    
+	    setProgressBarIndeterminateVisibility(true);
+	    
 	    btAdapter = BluetoothAdapter.getDefaultAdapter();								// get Bluetooth adapter / получаем локальный Bluetooth адаптер
 	    checkBTState();																	// Check Bluetooth / Проверяем наличие Bluetooth адаптера
 	}
@@ -178,8 +190,23 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
+		//menu.add(getString(0,1,0,R.string.choseAdaptorButtonText));
+		//menu.add(getString(0,2,0,R.);
+		//menu.add(getString(0,3,0,R.string.exitButtonText));
+		
+		SubMenu AdaptorMenu = menu.addSubMenu(1,4,2,getString(R.string.choseAdaptorButtonText));
+		AdaptorMenu.add("Dev1");
+		AdaptorMenu.add("dev2");
+
+		menu.add(1, 5, 2, getString(R.string.changePathToLogFile));
+		menu.add(2, 6, 4, getString(R.string.exitButtonText));
+		
+		
+		
+		
+		//getMenuInflater().inflate(R.menu.activity_main, menu);
+		//return true;
+	    return super.onCreateOptionsMenu(menu);
 	}
 	
 	private void checkBTState() {
