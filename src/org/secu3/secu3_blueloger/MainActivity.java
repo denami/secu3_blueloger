@@ -30,13 +30,8 @@ import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
 public class MainActivity extends Activity {
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT ).show();
-		return super.onOptionsItemSelected(item);
-	}
-
 	private static final String TAG = "secu3_blueloger";
+	
 	//clean Button 
 	// Кнопка для очистки
 	Button btnConnect;
@@ -50,18 +45,44 @@ public class MainActivity extends Activity {
 	// Status  for Handler
 	final int RECIEVE_MESSAGE = 1;
 	
+	private static final int REQUEST_CONNECT_DEVICE = 1;
 	
 	// SPP UUID service
 	// SPP UUID сервиса
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-	
 	
 	// MAC-address of Bluetooth module (you must edit this line)
 	// MAC-адрес Bluetooth модуля
 	private static String address = "00:12:03:30:00:23";
 	
 	private ConnectedThread mConnectedThread;
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT ).show();
+		switch (item.getItemId()) {
+		case 4:
+//			message = "Выбран пункт Копировать";
+			Intent i = new Intent(this, changePathToLogFileActivity.class);
+			startActivityForResult(i, REQUEST_CONNECT_DEVICE);
+			
+			break;
+		case 5:
+//			message = "Выбран пункт Вставить";
+			break;
+		case 6:
+			Log.d(TAG, "Exit from application");
+			//Exit from application
+			//Выход из приложения (сворачивание приложения)
+			finish();
+			break;
+		default:
+			return false;
+		}
 		
+		return super.onOptionsItemSelected(item);
+	}
+	
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -77,8 +98,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		btnConnect = (Button) findViewById(R.id.buttonconnect);
 		
+		btnConnect = (Button) findViewById(R.id.buttonconnect);
 		
 	    btnConnect.setOnClickListener(new OnClickListener() {
 	        public void onClick(View v) {
@@ -246,7 +267,8 @@ public class MainActivity extends Activity {
 					}
 					for (String strToPush: resultingList) {
 						wrt.append(strToPush);
-						h.obtainMessage(RECIEVE_MESSAGE, strToPush).sendToTarget(); // Send to message queue Handler
+						// Send to message queue Handler
+						h.obtainMessage(RECIEVE_MESSAGE, strToPush).sendToTarget(); 
 					}
 					//clear ArrayList  
 					//очищаем ArrayList
