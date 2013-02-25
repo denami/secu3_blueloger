@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.UUID;
 
 import android.os.Build;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 @SuppressLint("HandlerLeak")
 public class MainActivity extends Activity {
 	private static final String TAG = "secu3_blueloger";
+	private static final int REQUEST_CODE = 10;
 	
 	//clean Button 
 	// Кнопка для очистки
@@ -61,14 +63,14 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT ).show();
 		switch (item.getItemId()) {
-		case 4:
-//			message = "Выбран пункт Копировать";
+		case 5:
+			// ChangeLogFilenameSelected
 			Intent i = new Intent(this, changePathToLogFileActivity.class);
-			startActivityForResult(i, REQUEST_CONNECT_DEVICE);
+			startActivityForResult(i, REQUEST_CODE);
 			
 			break;
-		case 5:
-//			message = "Выбран пункт Вставить";
+		case 4:
+			//Select Bluetooth Device 
 			break;
 		case 6:
 			Log.d(TAG, "Exit from application");
@@ -83,6 +85,18 @@ public class MainActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+			if (data.hasExtra("lofFilePath")) {
+				//Toast.makeText(this, data.getExtras().getString("lofFilePath"), Toast.LENGTH_SHORT).show();
+				txtLod = (TextView) findViewById(R.id.textViewFilePath);
+				txtLod.setText( data.getExtras().getString("lofFilePath") ); 
+			}
+		}
+	}
+
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -105,7 +119,6 @@ public class MainActivity extends Activity {
 	        public void onClick(View v) {
 	        txtLod.setText("");
 	      	mConnectedThread.write("1");	// Send "1" via Bluetooth
-	          //Toast.makeText(getBaseContext(), "Turn on LED", Toast.LENGTH_SHORT).show();
 	        }
 	      });
 		
@@ -261,7 +274,10 @@ public class MainActivity extends Activity {
 							// if end-of-line,  
 							// если встречаем конец строки,
 							Log.d(TAG, "New message"); 
-							resultingList.add(sbInThread.toString()); //Add string to ArrayList / Добовляем строку в ArrayList 
+							//get current time
+							// получаем текущее время
+						    final Calendar c = Calendar.getInstance();
+							resultingList.add(c.getTime().toString()+": "+sbInThread.toString()); //Add string to ArrayList / Добовляем строку в ArrayList 
 							sbInThread = new StringBuilder(); //clear StringBuilder / и очищаем StringBuilder
 						}
 					}
