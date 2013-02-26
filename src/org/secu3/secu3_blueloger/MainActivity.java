@@ -62,16 +62,17 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT ).show();
+		//Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT ).show();
 		switch (item.getItemId()) {
 		case 5:
 			// ChangeLogFilenameSelected
 			Intent i = new Intent(this, changePathToLogFileActivity.class);
 			startActivityForResult(i, REQUEST_CODE);
-			
 			break;
 		case 4:
 			//Select Bluetooth Device 
+			Intent i1 = new Intent(this,changeBluetoothDeviceActivity.class);
+			startActivityForResult(i1, REQUEST_CODE);
 			break;
 		case 6:
 			Log.d(TAG, "Exit from application");
@@ -99,6 +100,11 @@ public class MainActivity extends Activity {
 
 				txtLod = (TextView) findViewById(R.id.textViewFilePath);
 				txtLod.setText( path.toString()+"/"+data.getExtras().getString("lofFilePath") ); 
+			}
+			
+			if (data.hasExtra("bluDevName")) {
+				txtLod = (TextView) findViewById(R.id.textViewFilePath);
+				txtLod.setText(data.getExtras().getString("bluDevName"));
 			}
 		}
 	}
@@ -150,7 +156,7 @@ public class MainActivity extends Activity {
 	@Override  
 	public void onResume() {
 		super.onResume();
-		Log.d(TAG, "...onResume - try connect...");
+		Log.d(TAG, "... onResume - try connect to remote device "+address+" ...");
 		// Set up a pointer to the remote node using it's address.
 		BluetoothDevice device = btAdapter.getRemoteDevice(address);
 		// Two things are needed to make a connection:
@@ -196,12 +202,13 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
-		SubMenu AdaptorMenu = menu.addSubMenu(1,//group
-											  4,//id
-											  2,//order
-											  getString(R.string.choseAdaptorButtonText)); //text
-		AdaptorMenu.add("Dev1");
-		AdaptorMenu.add("Dev2");
+		//SubMenu AdaptorMenu = menu.addSubMenu(1,//group
+		//									  4,//id
+		//									  2,//order
+		//									  getString(R.string.choseAdaptorButtonText)); //text
+		menu.add(1,4,2,getString(R.string.choseAdaptorButtonText));
+		//AdaptorMenu.add("Dev1");
+		//AdaptorMenu.add("Dev2");
 		menu.add(1, //group
 				 5, //id
 				 2, //order

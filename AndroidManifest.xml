@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:label="changePathToLogFileActivity" android:name="changePathToLogFileActivity"></activity>
+        <activity android:label="changeBluetoothDeviceActivity" android:name="changeBluetoothDeviceActivity"></activity>
     </application>
 
 </manifest>

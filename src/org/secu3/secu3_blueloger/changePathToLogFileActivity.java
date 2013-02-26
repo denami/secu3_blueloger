@@ -9,9 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-/**
- * 
- */
 
 /**
  * @author Andrei_Laptsinski
@@ -35,7 +32,6 @@ public class changePathToLogFileActivity extends Activity {
 	@Override
 	public void finish() {
 		EditText text1 = (EditText) findViewById(R.id.editTextPathToLogFile);
-		
 		String pathToFile=text1.getText().toString();
 		Intent data = new Intent();
 		data.putExtra("lofFilePath", pathToFile);
