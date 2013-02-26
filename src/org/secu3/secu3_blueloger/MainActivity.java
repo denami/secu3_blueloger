@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -91,8 +92,13 @@ public class MainActivity extends Activity {
 		if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
 			if (data.hasExtra("lofFilePath")) {
 				//Toast.makeText(this, data.getExtras().getString("lofFilePath"), Toast.LENGTH_SHORT).show();
+				String state = Environment.getExternalStorageState();
+				File pathToWorkFolder= Environment.getExternalStorageDirectory();
+				 File path = Environment.getExternalStoragePublicDirectory(
+				            Environment.DIRECTORY_DOWNLOADS);
+
 				txtLod = (TextView) findViewById(R.id.textViewFilePath);
-				txtLod.setText( data.getExtras().getString("lofFilePath") ); 
+				txtLod.setText( path.toString()+"/"+data.getExtras().getString("lofFilePath") ); 
 			}
 		}
 	}
