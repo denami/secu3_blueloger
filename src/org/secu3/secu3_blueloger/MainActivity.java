@@ -99,7 +99,7 @@ public class MainActivity extends Activity {
 				            Environment.DIRECTORY_DOWNLOADS);
 
 				txtLod = (TextView) findViewById(R.id.textViewFilePath);
-				txtLod.setText( path.toString()+"/"+data.getExtras().getString("lofFilePath") ); 
+				txtLod.setText( path.toString()+"/"+data.getExtras().getString("lofFilePath")+"_"+getFilesDir().toString() ); 
 			}
 			
 			if (data.hasExtra("bluDevName")) {
@@ -124,6 +124,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Log.d(TAG, "...PackageName: " + getFilesDir().toString() + "...");
+		
 		
 		btnConnect = (Button) findViewById(R.id.buttonconnect);
 		
