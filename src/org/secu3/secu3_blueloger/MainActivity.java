@@ -10,20 +10,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -48,7 +47,7 @@ public class MainActivity extends Activity {
 	// Status  for Handler
 	final int RECIEVE_MESSAGE = 1;
 	
-	private static final int REQUEST_CONNECT_DEVICE = 1;
+	//private static final int REQUEST_CONNECT_DEVICE = 1;
 	
 	// SPP UUID service
 	// SPP UUID сервиса
@@ -59,6 +58,9 @@ public class MainActivity extends Activity {
 	private static String address = "00:12:03:30:00:23";
 	
 	private ConnectedThread mConnectedThread;
+	
+	
+	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -93,17 +95,17 @@ public class MainActivity extends Activity {
 		if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
 			if (data.hasExtra("lofFilePath")) {
 				//Toast.makeText(this, data.getExtras().getString("lofFilePath"), Toast.LENGTH_SHORT).show();
-				String state = Environment.getExternalStorageState();
-				File pathToWorkFolder= Environment.getExternalStorageDirectory();
+				//String state = Environment.getExternalStorageState();
+				//File pathToWorkFolder= Environment.getExternalStorageDirectory();
 				 File path = Environment.getExternalStoragePublicDirectory(
 				            Environment.DIRECTORY_DOWNLOADS);
 
-				txtLod = (TextView) findViewById(R.id.textViewFilePath);
+
 				txtLod.setText( path.toString()+"/"+data.getExtras().getString("lofFilePath")+"_"+getFilesDir().toString() ); 
 			}
 			
 			if (data.hasExtra("bluDevName")) {
-				txtLod = (TextView) findViewById(R.id.textViewFilePath);
+
 				txtLod.setText(data.getExtras().getString("bluDevName"));
 			}
 		}
@@ -187,6 +189,13 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "...Создание Socket...");
 		mConnectedThread = new ConnectedThread(btSocket);
 		mConnectedThread.start();
+		
+		SECU3Packet.PacketCode testPacket = SECU3Packet.PacketCode.SENSOR_DAT;
+		
+		txtLod = (TextView) findViewById(R.id.debugTextView);
+		txtLod.setText(testPacket.toString());
+		
+		
 	}
 	 
 	private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
@@ -260,7 +269,15 @@ public class MainActivity extends Activity {
 			mmInStream = tmpIn;
 			mmOutStream = tmpOut;    
 		}
-		File toLogFile = new File (getString(R.string._sdcard_test_log));
+		
+		
+		File pathToDirectoryDownload = Environment.getExternalStoragePublicDirectory(
+	            Environment.DIRECTORY_DOWNLOADS);
+		
+		//File toLogFile = new File (getString(R.string._sdcard_test_log));
+		
+		File toLogFile = new File (pathToDirectoryDownload+"/"+getString(R.string.Secu3LogFileName));
+		
 		
 		public void run() {
 			byte[] buffer = new byte[256];  // buffer store for the stream
