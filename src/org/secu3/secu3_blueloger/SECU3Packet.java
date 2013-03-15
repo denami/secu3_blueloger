@@ -249,6 +249,7 @@ public class SECU3Packet {
 	//ADD_I1 input
 	public int getAdd_i1_v() {
 		
+		
 		return 0;
 	}
 	
@@ -298,4 +299,29 @@ public class SECU3Packet {
 		
 		return 0;
 	}
+	
+	//Parse_FNNAME_DAT
+	//Общее кол-во наборов (семейств характеристик)
+	public int getFnTables_num() {
+		
+		
+		return 0;
+	}
+	
+	//Parse_FNNAME_DAT
+	//номер этого набора характеристик
+	public int getFnIndex() {
+		
+		
+		return 0;
+	}
+	
+	//Parse_FNNAME_DAT
+	//имя этого набора характеристик
+	public String getFnName() {
+
+		
+		return "";
+	}
+	
 }
