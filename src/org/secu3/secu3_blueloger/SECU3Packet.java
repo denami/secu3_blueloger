@@ -330,7 +330,6 @@ public class SECU3Packet {
 		int order=pc.ordinal();
 		String outputString;
 		// загрузка массива строк из res/values/arrays.xml в текстовое поле textStrings
-		//Resources secuRes = null;//getResources();	
 		String[] names = Resources.getSystem().getStringArray(R.array.packetTypeSymbol);
 		//for(int i = 0; i < names.length; i++) {
 		//    textStrings.append("Name[" + i + "]: "+ names[i] + "\n");
