@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="packetTypeSymbol">
+        <item>h</item> <!-- CHANGEMODE = "h";   //!< change mode (type of default packet) -->
+        <item>i</item> <!-- BOOTLOADER = "i";   //!< start boot loader -->
+        <item>j</item> <!-- TEMPER_PAR = "j";   //!< temperature parameters (coolant sensor, engine cooling etc) -->
+        <item>k</item> <!-- CARBUR_PAR = "k";   //!< carburetor's parameters -->
+        <item>l</item> <!-- IDLREG_PAR = "l";   //!< idling regulator parameters -->
+        <item>m</item> <!-- ANGLES_PAR = "m";   //!< advance angle (ign. timing) parameters -->
+        <item>n</item> <!-- FUNSET_PAR = "n";   //!< parametersrelated to set of functions (lookup tables) -->
+        <item>o</item> <!-- STARTR_PAR = "o";   //!< engine start parameters -->
+        <item>p</item> <!-- FNNAME_DAT = "p";   //!< used for transfering of names of set of functions (lookup tables) -->
+        <item>q</item> <!-- SENSOR_DAT = "q";   //!< used for transfering of sensors data -->
+        <item>r</item> <!-- ADCCOR_PAR = "r";   //!< parameters related to ADC corrections -->
+        <item>s</item> <!-- ADCRAW_DAT = "s";   //!< used for transfering 'raw" values directly from ADC -->
+        <item>t</item> <!-- CKPS_PAR   = "t";   //!< CKP sensor parameters -->
+		<item>u</item> <!-- OP_COMP_NC = "u";   //!< used to indicate that specified (suspended) operation completed --> 
+		<item>v</item> <!-- CE_ERR_CODES = "v"; //!< used for transfering of CE codes -->
+		<item>w</item> <!-- KNOCK_PAR  = "w";   //!< parameters related to knock detection and knock chip -->
+		<item>x</item> <!-- CE_SAVED_ERR = "x";   //!< used for transfering of CE codes stored in the EEPROM -->
+		<item>y</item> <!-- FWINFO_DAT = "y";   //!< used for transfering information about firmware -->
+		<item>z</item> <!-- MISCEL_PAR = "z";   //!< miscellaneous parameters -->
+		<item>{</item> <!-- EDITAB_PAR = "{";   //!< used for transferring of data for realtime tables editing -->
+		<item>}</item> <!-- ATTTAB_PAR = "}";   //!< used for transferring of attenuator map (knock detection related) -->
+		<item>:</item> <!-- DBGVAR_DAT = ":";  //!< for watching of firmware variables (used for debug purposes) -->
+		<item>=</item> <!-- DIAGINP_DAT = "=";  //!< diagnostics: send input values (analog & digital values) -->
+		<item>^</item> <!-- DIAGOUT_DAT = "^";  //!< diagnostics: receive output states (bits) -->
+		<item>%</item> <!-- CHOKE_PAR   = "%";   //!< parameters  related to choke control -->
+    </string-array>
+</resources>
