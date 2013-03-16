@@ -59,9 +59,6 @@ public class MainActivity extends Activity {
 	
 	private ConnectedThread mConnectedThread;
 	
-	
-	
-	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		//Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT ).show();
@@ -192,8 +189,15 @@ public class MainActivity extends Activity {
 		
 		SECU3Packet.PacketCode testPacket = SECU3Packet.PacketCode.SENSOR_DAT;
 		
-		txtLod = (TextView) findViewById(R.id.debugTextView);
-		txtLod.setText(testPacket.toString());
+		txtLod = (TextView) findViewById(R.id.debugTextView);		
+		SECU3Packet S3Packet = new SECU3Packet();
+
+		txtLod.setText(S3Packet.getSymbolOfPacketType(testPacket));
+		
+		S3Packet = new SECU3Packet("@q0000030012CC02650000000000000013");
+		//S3Packet.getPacketCode();
+		String str = S3Packet.getPacketCode().name();
+		txtLod.setText(str);
 		
 		
 	}
@@ -212,14 +216,9 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		
-		//SubMenu AdaptorMenu = menu.addSubMenu(1,//group
-		//									  4,//id
-		//									  2,//order
-		//									  getString(R.string.choseAdaptorButtonText)); //text
+
 		menu.add(1,4,2,getString(R.string.choseAdaptorButtonText));
-		//AdaptorMenu.add("Dev1");
-		//AdaptorMenu.add("Dev2");
+
 		menu.add(1, //group
 				 5, //id
 				 2, //order
