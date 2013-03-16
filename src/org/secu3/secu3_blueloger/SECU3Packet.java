@@ -1,8 +1,11 @@
 package org.secu3.secu3_blueloger;
 
-import android.content.res.Resources;
+
+
 
 public class SECU3Packet {
+	
+	
 	
 	public enum PacketCode {
 		CHANGEMODE,						//!< change mode (type of default packet)
@@ -31,6 +34,36 @@ public class SECU3Packet {
 		DIAGOUT_DAT,					//!< diagnostics: receive output states (bits)
 		CHOKE_PAR;						//!< parameters  related to choke control
 	}
+	
+	private String[] packetCodeSymbols = {
+			"h",   //!< change mode (type of default packet)
+			"i",   //!< start boot loader
+			"j",   //!< temperature parameters (coolant sensor, engine cooling etc)
+			"k",   //!< carburetor's parameters
+			"l",   //!< idling regulator parameters
+			"m",   //!< advance angle (ign. timing) parameters
+			"n",   //!< parametersrelated to set of functions (lookup tables)
+			"o",   //!< engine start parameters
+			"p",   //!< used for transfering of names of set of functions (lookup tables)
+			"q",   //!< used for transfering of sensors data
+			"r",   //!< parameters related to ADC corrections
+			"s",   //!< used for transfering 'raw" values directly from ADC
+			"t",   //!< CKP sensor parameters
+			"u",   //!< used to indicate that specified (suspended) operation completed
+			"v",   //!< used for transfering of CE codes
+			"w",   //!< parameters related to knock detection and knock chip
+			"x",   //!< used for transfering of CE codes stored in the EEPROM
+			"y",   //!< used for transfering information about firmware
+			"z",   //!< miscellaneous parameters
+			"{",   //!< used for transferring of data for realtime tables editing
+			"}",   //!< used for transferring of attenuator map (knock detection related)
+			":",  //!< for watching of firmware variables (used for debug purposes)
+			"=",  //!< diagnostics: send input values (analog & digital values)
+			"^",  //!< diagnostics: receive output states (bits)
+			"%"};   //!< parameters  related to choke control};
+
+	
+	
 	
 //	private static final String CHANGEMODE = "h";   //!< change mode (type of default packet)
 //	private static final String BOOTLOADER = "i";   //!< start boot loader
@@ -329,15 +362,11 @@ public class SECU3Packet {
 	public String getSymbolOfPacketType(PacketCode pc) {
 		int order=pc.ordinal();
 		String outputString;
-		// загрузка массива строк из res/values/arrays.xml в текстовое поле textStrings
-		String[] names = Resources.getSystem().getStringArray(R.array.packetTypeSymbol);
-		//for(int i = 0; i < names.length; i++) {
-		//    textStrings.append("Name[" + i + "]: "+ names[i] + "\n");
-		//} 
-		outputString=names[order];
-		
+		outputString=packetCodeSymbols[order];
 		return outputString;
 	}
+	
+
 	
 	
 }
