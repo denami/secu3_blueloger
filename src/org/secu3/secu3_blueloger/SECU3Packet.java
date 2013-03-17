@@ -3,11 +3,8 @@ package org.secu3.secu3_blueloger;
 import android.util.Log;
 
 
-
-
 public class SECU3Packet {
 	private static final String TAG = "SECU3PacketLog";
-	
 	
 	public enum PacketCode {
 		CHANGEMODE,						//!< change mode (type of default packet)
@@ -20,6 +17,7 @@ public class SECU3Packet {
 		STARTR_PAR,						//!< engine start parameters
 		FNNAME_DAT,						//!< used for transfering of names of set of functions (lookup tables)
 		SENSOR_DAT,              		//!< used for transfering of sensors data
+		//		SENSOR_DAT example string @q0000030012CC02650000000000000013 	
 		ADCCOR_PAR,						//!< parameters related to ADC corrections
 		ADCRAW_DAT,						//!< used for transfering 'raw" values directly from ADC
 		CKPS_PAR,						//!< CKP sensor parameters
@@ -37,7 +35,7 @@ public class SECU3Packet {
 		CHOKE_PAR;						//!< parameters  related to choke control
 	}
 	
-	private final String[] packetCodeSymbols = {
+	private String[] packetCodeSymbols = {
 			"h",   //!< change mode (type of default packet)
 			"i",   //!< start boot loader
 			"j",   //!< temperature parameters (coolant sensor, engine cooling etc)
@@ -78,8 +76,7 @@ public class SECU3Packet {
 			11,
 			12,
 			13};
-	
-	
+
 //	private static final String CHANGEMODE = "h";   //!< change mode (type of default packet)
 //	private static final String BOOTLOADER = "i";   //!< start boot loader
 //	private static final String TEMPER_PAR = "j";   //!< temperature parameters (coolant sensor, engine cooling etc)
@@ -107,7 +104,7 @@ public class SECU3Packet {
 //	private static final String CHOKE_PAR   = "%";   //!< parameters  related to choke control
 
 	
-//	SENSOR_DAT example string @q0000030012CC02650000000000000013 	
+
 	
 	private String PacketStr;
 	

@@ -193,12 +193,14 @@ public class MainActivity extends Activity {
 		SECU3Packet S3Packet = new SECU3Packet();
 
 		txtLod.setText(S3Packet.getSymbolOfPacketType(testPacket));
+
 		
 		S3Packet = new SECU3Packet("@q0000030012CC02650000000000000013");
 		//S3Packet.getPacketCode();
 		String str = S3Packet.getPacketCode().name();
 		txtLod.setText(str);
 		
+
 		
 	}
 	 
