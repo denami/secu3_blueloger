@@ -35,7 +35,7 @@ public class SECU3Packet {
 		CHOKE_PAR;						//!< parameters  related to choke control
 	}
 	
-	private String[] packetCodeSymbols = {
+	private final String[] packetCodeSymbols = {
 			"h",   //!< change mode (type of default packet)
 			"i",   //!< start boot loader
 			"j",   //!< temperature parameters (coolant sensor, engine cooling etc)
@@ -136,13 +136,8 @@ public class SECU3Packet {
 			String tmp=packetCodeSymbols[i];
 			if (PacketCodeFromString.equals(tmp)) {
 				return p[i]; 
-			}
-
-			//if (PacketCodeFromString== "q")
-			//	pCode = PacketCode.SENSOR_DAT;
-			
+			}	
 		}
-		
 		return pCode;
 	}
 	
