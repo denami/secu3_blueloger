@@ -7,7 +7,7 @@ public class SECU3Packet {
 	private static final String TAG = "SECU3PacketLog";
 	
 	public enum PacketCode {
-		CHANGEMODE,						//!< change mode (type of default packet)
+		CHANGEMODE ,					//!< change mode (type of default packet)
 		BOOTLOADER,						//!< start boot loader
 		TEMPER_PAR,						//!< temperature parameters (coolant sensor, engine cooling etc)
 		CARBUR_PAR,						//!< carburetor's parameters
@@ -16,8 +16,7 @@ public class SECU3Packet {
 		FUNSET_PAR,						//!< parametersrelated to set of functions (lookup tables)
 		STARTR_PAR,						//!< engine start parameters
 		FNNAME_DAT,						//!< used for transfering of names of set of functions (lookup tables)
-		SENSOR_DAT,              		//!< used for transfering of sensors data
-		//		SENSOR_DAT example string @q0000030012CC02650000000000000013 	
+		SENSOR_DAT,              		//!< used for transfering of sensors data //SENSOR_DAT example string @q0000030012CC02650000000000000013 	
 		ADCCOR_PAR,						//!< parameters related to ADC corrections
 		ADCRAW_DAT,						//!< used for transfering 'raw" values directly from ADC
 		CKPS_PAR,						//!< CKP sensor parameters
@@ -35,6 +34,45 @@ public class SECU3Packet {
 		CHOKE_PAR;						//!< parameters  related to choke control
 	}
 	
+	public enum Packets {
+		CHANGEMODE 	 (1, "h"),	//!< change mode (type of default packet)
+		BOOTLOADER 	 (1, "i"),	//!< start boot loader
+		TEMPER_PAR 	 (12, "j"),	//!< temperature parameters (coolant sensor, engine cooling etc)
+		CARBUR_PAR 	 (26, "k"),	//!< carburetor's parameters
+		IDLREG_PAR 	 (30, "l"),	//!< idling regulator parameters
+		ANGLES_PAR 	 (22, "m"),	//!< advance angle (ign. timing) parameters
+		FUNSET_PAR 	 (29, "n"),	//!< parametersrelated to set of functions (lookup tables)
+		STARTR_PAR 	 (9, "o"),	//!< engine start parameters
+		FNNAME_DAT 	 (21,"p"),	//!< used for transfering of names of set of functions (lookup tables)
+		SENSOR_DAT 	 (47,"q"),	//!< used for transfering of sensors data //SENSOR_DAT example string @q0000030012CC02650000000000000013 	
+		ADCCOR_PAR 	 (73,"r"),	//!< parameters related to ADC corrections
+		ADCRAW_DAT 	 (29,"s"),	//!< used for transfering 'raw" values directly from ADC
+		CKPS_PAR	 (14,"t"),	//!< CKP sensor parameters
+		OP_COMP_NC 	 (5,"u"),	//!< used to indicate that specified (suspended) operation completed
+		CE_ERR_CODES (5,"v"),	//!< used for transfering of CE codes
+		KNOCK_PAR 	 (14+18,"w"),	//!< parameters related to knock detection and knock chip
+		CE_SAVED_ERR (5,"x"),	//!< used for transfering of CE codes stored in the EEPROM
+		FWINFO_DAT 	 (1,"y"),	//!< used for transfering information about firmware
+		MISCEL_PAR 	 (16,"z"),	//!< miscellaneous parameters
+		EDITAB_PAR 	 (1,"{"),	//!< used for transferring of data for realtime tables editing
+		ATTTAB_PAR 	 (1,"}"),	//!< used for transferring of attenuator map (knock detection related)
+		DBGVAR_DAT 	 (17,":"),	//!< for watching of firmware variables (used for debug purposes)
+		DIAGINP_DAT  (35,"="),	//!< diagnostics: send input values (analog & digital values)
+		DIAGOUT_DAT  (1,"^"),	//!< diagnostics: receive output states (bits)
+		CHOKE_PAR 	 (6,"%");	//!< parameters  related to choke control
+		
+	    private final int packetLength;   //размер пакета без сигнального символа, дескриптора 	
+	    private final String packetCodeSymbols; // Символ типа пакета	
+   
+	    Packets(int packetLength, String packetCodeSymbols) {
+	        this.packetLength = packetLength;
+	        this.packetCodeSymbols=packetCodeSymbols;
+	    }
+		
+	    private int packetLength() { return packetLength; }
+	    private String packetCodeSymbols() {return packetCodeSymbols; }
+		
+	}
 	private final String[] packetCodeSymbols = {
 			"h",   //!< change mode (type of default packet)
 			"i",   //!< start boot loader
@@ -72,7 +110,7 @@ public class SECU3Packet {
 			7,
 			8,
 			9,
-			10,
+			47,
 			11,
 			12,
 			13};
@@ -117,6 +155,12 @@ public class SECU3Packet {
 	SECU3Packet(String PacketStrOnCreate) {
 		PacketStr=PacketStrOnCreate;
 		Log.d(TAG, "...PacketString: " + PacketStr + "...");
+		Packets p =  Packets.SENSOR_DAT;
+		int t = packetlength[4];
+		Log.d(TAG, "...PacketString: " + p.name() + "...");
+		Log.d(TAG, "...Packet Length: " + p.packetLength() + "...");
+		Log.d(TAG, "...Packet CodeSymbols: " + p.packetCodeSymbols() + "...");
+		Log.d(TAG, "...test: " + t + "...");
 	}
 	
 	public String toString() {
