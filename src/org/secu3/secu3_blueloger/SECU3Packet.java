@@ -1,4 +1,4 @@
-package org.secu3.secu3_blueloger;
+ï»¿package org.secu3.secu3_blueloger;
 
 import android.util.Log;
 
@@ -61,8 +61,8 @@ public class SECU3Packet {
 		DIAGOUT_DAT  (1,"^"),	//!< diagnostics: receive output states (bits)
 		CHOKE_PAR 	 (6,"%");	//!< parameters  related to choke control
 		
-	    private final int packetLength;   //ðàçìåð ïàêåòà áåç ñèãíàëüíîãî ñèìâîëà, äåñêðèïòîðà 	
-	    private final String packetCodeSymbols; // Ñèìâîë òèïà ïàêåòà	
+	    private final int packetLength;   //Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð¿Ð°ÐºÐµÑ‚Ð° Ð±ÐµÐ· ÑÐ¸Ð³Ð½Ð°Ð»ÑŒÐ½Ð¾Ð³Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð°, Ð´ÐµÑÐºÑ€Ð¸Ð¿Ñ‚Ð¾Ñ€Ð° 	
+	    private final String packetCodeSymbols; // Ð¡Ð¸Ð¼Ð²Ð¾Ð» Ñ‚Ð¸Ð¿Ð° Ð¿Ð°ÐºÐµÑ‚Ð°	
    
 	    Packets(int packetLength, String packetCodeSymbols) {
 	        this.packetLength = packetLength;
@@ -192,8 +192,8 @@ public class SECU3Packet {
 		return packetCode;
 	}
 	
-	//Äàííûå èç ControlApp.cpp
-	//÷àñòîòà âðàùåíèÿ äâèãàòåëÿ 
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
+	//Ñ‡Ð°ÑÑ‚Ð¾Ñ‚Ð° Ð²Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ Ð´Ð²Ð¸Ð³Ð°Ñ‚ÐµÐ»Ñ 
 	//Parse_SENSOR_DAT
 	public int getFrequen(){
 		
@@ -204,75 +204,75 @@ public class SECU3Packet {
 		else return -1;
 	}
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//äàâëåíèå âî âïóñêíîì êîëëåêòîðå
+	//Ð´Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð²Ð¾ Ð²Ð¿ÑƒÑÐºÐ½Ð¾Ð¼ ÐºÐ¾Ð»Ð»ÐµÐºÑ‚Ð¾Ñ€Ðµ
 	public int getPressure() {
 		
 		return 0;
 	}
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//íàïðÿæåíèå áîðòîâîé ñåòè
+	//Ð½Ð°Ð¿Ñ€ÑÐ¶ÐµÐ½Ð¸Ðµ Ð±Ð¾Ñ€Ñ‚Ð¾Ð²Ð¾Ð¹ ÑÐµÑ‚Ð¸
 	public int getVoltage() {
 
 		return 0;
 	}
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Òåìïåðàòóðà îõëàæäàþùåé æèäêîñòè
+	//Ð¢ÐµÐ¼Ð¿ÐµÑ€Ð°Ñ‚ÑƒÑ€Ð° Ð¾Ñ…Ð»Ð°Ð¶Ð´Ð°ÑŽÑ‰ÐµÐ¹ Ð¶Ð¸Ð´ÐºÐ¾ÑÑ‚Ð¸
 	public int getTemperature() {
 		
 		return 0;
 	}
 
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Òåêóùèé ÓÎÇ (÷èñëî ñî çíàêîì)
+	//Ð¢ÐµÐºÑƒÑ‰Ð¸Ð¹ Ð£ÐžÐ— (Ñ‡Ð¸ÑÐ»Ð¾ ÑÐ¾ Ð·Ð½Ð°ÐºÐ¾Ð¼)
 	public int getAdv_angle() {
 		
 		return 0;
 	}
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Óðîâåíü äåòîíàöèè äâèãàòåëÿ
+	//Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ Ð´ÐµÑ‚Ð¾Ð½Ð°Ñ†Ð¸Ð¸ Ð´Ð²Ð¸Ð³Ð°Ñ‚ÐµÐ»Ñ
 	public int getKnock_k() {
 		
 		return 0;
 	}
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Êîððåêòèðîâêà ÓÎÇ ïðè äåòîíàöèè
+	//ÐšÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð£ÐžÐ— Ð¿Ñ€Ð¸ Ð´ÐµÑ‚Ð¾Ð½Ð°Ñ†Ð¸Ð¸
 	public int getKnock_retard() {
 		
 		return 0;
 	}
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Ðàñõîä âîçäóõà
+	//Ð Ð°ÑÑ…Ð¾Ð´ Ð²Ð¾Ð·Ð´ÑƒÑ…Ð°
 	public int getAir_flow() {
 		
 		return 0;
 	}
 	
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Áàéò ñ ôëàæêàìè
+	//Ð‘Ð°Ð¹Ñ‚ Ñ Ñ„Ð»Ð°Ð¶ÐºÐ°Ð¼Ð¸
 	public byte getByteFlags() {
 		
 		return 0;
 	}
 	
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Ñîñòîÿíèå êëàïàíà ÝÏÕÕ
+	//Ð¡Ð¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ ÐºÐ»Ð°Ð¿Ð°Ð½Ð° Ð­ÐŸÐ¥Ð¥
 	//ephh_valve
 	public boolean getEphh_valve() {
 		
@@ -280,9 +280,9 @@ public class SECU3Packet {
 	}
 	
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Ñîñòîÿíèå äðîññåëüíîé çàñëîíêè
+	//Ð¡Ð¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð´Ñ€Ð¾ÑÑÐµÐ»ÑŒÐ½Ð¾Ð¹ Ð·Ð°ÑÐ»Ð¾Ð½ÐºÐ¸
 	public boolean getCarb() {
 		
 		
@@ -290,45 +290,45 @@ public class SECU3Packet {
 	}
 	
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Ñîñòîÿíèå ãàçîâîãî êëàïàíà
+	//Ð¡Ð¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð³Ð°Ð·Ð¾Ð²Ð¾Ð³Ð¾ ÐºÐ»Ð°Ð¿Ð°Ð½Ð°
 	public boolean getGas() {
 		
 		
 		return false;
 	}	
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Ñîñòîÿíèå êëàïàíà ÝÌÐ
+	//Ð¡Ð¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ ÐºÐ»Ð°Ð¿Ð°Ð½Ð° Ð­ÐœÐ 
 	public boolean getEpm_valve() {
 		
 		
 		return false;
 	}	
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Ñîñòîÿíèå ëàìïû "CE"
+	//Ð¡Ð¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð»Ð°Ð¼Ð¿Ñ‹ "CE"
 	public boolean getCe_state() {
 		
 		
 		return false;
 	}	
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Ñîñòîÿíèå âåíòèëÿòîðà
+	//Ð¡Ð¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð²ÐµÐ½Ñ‚Ð¸Ð»ÑÑ‚Ð¾Ñ€Ð°
 	public boolean getCool_fan() {
 		
 		
 		return false;
 	}	
 	
-	//Äàííûå èç ControlApp.cpp
+	//Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Ñîñòîÿíèå ðåëå áëîêèðîâêè ñòàðòåðà
+	//Ð¡Ð¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ñ€ÐµÐ»Ðµ Ð±Ð»Ð¾ÐºÐ¸Ñ€Ð¾Ð²ÐºÐ¸ ÑÑ‚Ð°Ñ€Ñ‚ÐµÑ€Ð°
 	public boolean getSt_block() {
 			
 			
@@ -358,7 +358,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_SENSOR_DAT
-	//Áèòû îøèáîê ÑÅ
+	//Ð‘Ð¸Ñ‚Ñ‹ Ð¾ÑˆÐ¸Ð±Ð¾Ðº Ð¡Ð•
 	public int getCe_errors() {
 		
 		
@@ -366,7 +366,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_DBGVAR_DAT
-	//ïåðåìåííàÿ 1
+	//Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð°Ñ 1
 	public int getDbgvarDat_var1() {
 		
 		
@@ -374,7 +374,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_DBGVAR_DAT
-	//ïåðåìåííàÿ 2
+	//Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð°Ñ 2
 	public int getDbgvarDat_var2() {
 		
 		
@@ -382,7 +382,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_DBGVAR_DAT
-	//ïåðåìåííàÿ 3
+	//Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð°Ñ 3
 	public int getDbgvarDat_var3() {
 		
 		
@@ -390,7 +390,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_DBGVAR_DAT
-	//ïåðåìåííàÿ 4
+	//Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð°Ñ 4
 	public int getDbgvarDat_var4() {
 		
 		
@@ -398,7 +398,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_FNNAME_DAT
-	//Îáùåå êîë-âî íàáîðîâ (ñåìåéñòâ õàðàêòåðèñòèê)
+	//ÐžÐ±Ñ‰ÐµÐµ ÐºÐ¾Ð»-Ð²Ð¾ Ð½Ð°Ð±Ð¾Ñ€Ð¾Ð² (ÑÐµÐ¼ÐµÐ¹ÑÑ‚Ð² Ñ…Ð°Ñ€Ð°ÐºÑ‚ÐµÑ€Ð¸ÑÑ‚Ð¸Ðº)
 	public int getFnTables_num() {
 		
 		
@@ -406,7 +406,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_FNNAME_DAT
-	//íîìåð ýòîãî íàáîðà õàðàêòåðèñòèê
+	//Ð½Ð¾Ð¼ÐµÑ€ ÑÑ‚Ð¾Ð³Ð¾ Ð½Ð°Ð±Ð¾Ñ€Ð° Ñ…Ð°Ñ€Ð°ÐºÑ‚ÐµÑ€Ð¸ÑÑ‚Ð¸Ðº
 	public int getFnIndex() {
 		
 		
@@ -414,7 +414,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_FNNAME_DAT
-	//èìÿ ýòîãî íàáîðà õàðàêòåðèñòèê
+	//Ð¸Ð¼Ñ ÑÑ‚Ð¾Ð³Ð¾ Ð½Ð°Ð±Ð¾Ñ€Ð° Ñ…Ð°Ñ€Ð°ÐºÑ‚ÐµÑ€Ð¸ÑÑ‚Ð¸Ðº
 	public String getFnName() {
 
 		
