@@ -4,8 +4,10 @@ import android.util.Log;
 
 
 public class SECU3Packet {
+	
 	private static final String TAG = "SECU3PacketLog";
 	
+	@Deprecated
 	public enum PacketCode {
 		CHANGEMODE ,					//!< change mode (type of default packet)
 		BOOTLOADER,						//!< start boot loader
@@ -73,6 +75,7 @@ public class SECU3Packet {
 	    private String packetCodeSymbols() {return packetCodeSymbols; }
 		
 	}
+	@Deprecated
 	private final String[] packetCodeSymbols = {
 			"h",   //!< change mode (type of default packet)
 			"i",   //!< start boot loader
@@ -100,6 +103,7 @@ public class SECU3Packet {
 			"^",  //!< diagnostics: receive output states (bits)
 			"%"};   //!< parameters  related to choke control};
 
+	@Deprecated
 	private final int[] packetlength = {
 			1,
 			2,
@@ -421,14 +425,6 @@ public class SECU3Packet {
 		return "";
 	}
 	
-	public String getSymbolOfPacketType(PacketCode pc) {
-		int order=pc.ordinal();
-		String outputString;
-		outputString=packetCodeSymbols[order];
-		return outputString;
-	}
-	
-
-	
-	
+	public String getSymbolOfPacketType(Packets pc) { return pc.packetCodeSymbols(); }
+		
 }
