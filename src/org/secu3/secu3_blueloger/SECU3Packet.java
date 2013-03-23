@@ -421,12 +421,7 @@ public class SECU3Packet {
 		return "";
 	}
 	
-	public String getSymbolOfPacketType(PacketCode pc) {
-		int order=pc.ordinal();
-		String outputString;
-		outputString=packetCodeSymbols[order];
-		return outputString;
-	}
+	public String getSymbolOfPacketType(Packets pc) { return pc.packetCodeSymbols(); }
 	
 
 	

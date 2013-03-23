@@ -187,7 +187,7 @@ public class MainActivity extends Activity {
 		mConnectedThread = new ConnectedThread(btSocket);
 		mConnectedThread.start();
 		
-		SECU3Packet.PacketCode testPacket = SECU3Packet.PacketCode.SENSOR_DAT;
+		SECU3Packet.Packets testPacket = SECU3Packet.Packets.SENSOR_DAT;
 		
 		txtLod = (TextView) findViewById(R.id.debugTextView);		
 		SECU3Packet S3Packet = new SECU3Packet();
