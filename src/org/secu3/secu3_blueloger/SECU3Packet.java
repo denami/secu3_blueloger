@@ -61,8 +61,8 @@ public class SECU3Packet {
 		DIAGOUT_DAT  (1,"^"),	//!< diagnostics: receive output states (bits)
 		CHOKE_PAR 	 (6,"%");	//!< parameters  related to choke control
 		
-	    private final int packetLength;   //размер пакета без сигнального символа, дескриптора 	
-	    private final String packetCodeSymbols; // Символ типа пакета	
+	    private final int packetLength;   //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 	
+	    private final String packetCodeSymbols; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ	
    
 	    Packets(int packetLength, String packetCodeSymbols) {
 	        this.packetLength = packetLength;
@@ -192,8 +192,8 @@ public class SECU3Packet {
 		return packetCode;
 	}
 	
-	//Данные из ControlApp.cpp
-	//частота вращения двигателя 
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 	//Parse_SENSOR_DAT
 	public int getFrequen(){
 		
@@ -204,75 +204,75 @@ public class SECU3Packet {
 		else return -1;
 	}
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//давление во впускном коллекторе
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public int getPressure() {
 		
 		return 0;
 	}
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//напряжение бортовой сети
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	public int getVoltage() {
 
 		return 0;
 	}
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Температура охлаждающей жидкости
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public int getTemperature() {
 		
 		return 0;
 	}
 
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Текущий УОЗ (число со знаком)
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
 	public int getAdv_angle() {
 		
 		return 0;
 	}
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Уровень детонации двигателя
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public int getKnock_k() {
 		
 		return 0;
 	}
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Корректировка УОЗ при детонации
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public int getKnock_retard() {
 		
 		return 0;
 	}
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Расход воздуха
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public int getAir_flow() {
 		
 		return 0;
 	}
 	
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Байт с флажками
+	//пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public byte getByteFlags() {
 		
 		return 0;
 	}
 	
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Состояние клапана ЭПХХ
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	//ephh_valve
 	public boolean getEphh_valve() {
 		
@@ -280,9 +280,9 @@ public class SECU3Packet {
 	}
 	
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Состояние дроссельной заслонки
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public boolean getCarb() {
 		
 		
@@ -290,45 +290,45 @@ public class SECU3Packet {
 	}
 	
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Состояние газового клапана
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public boolean getGas() {
 		
 		
 		return false;
 	}	
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Состояние клапана ЭМР
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 	public boolean getEpm_valve() {
 		
 		
 		return false;
 	}	
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Состояние лампы "CE"
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ "CE"
 	public boolean getCe_state() {
 		
 		
 		return false;
 	}	
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Состояние вентилятора
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public boolean getCool_fan() {
 		
 		
 		return false;
 	}	
 	
-	//Данные из ControlApp.cpp
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ControlApp.cpp
 	//Parse_SENSOR_DAT
-	//Состояние реле блокировки стартера
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public boolean getSt_block() {
 			
 			
@@ -358,7 +358,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_SENSOR_DAT
-	//Биты ошибок СЕ
+	//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 	public int getCe_errors() {
 		
 		
@@ -366,7 +366,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_DBGVAR_DAT
-	//переменная 1
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1
 	public int getDbgvarDat_var1() {
 		
 		
@@ -374,7 +374,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_DBGVAR_DAT
-	//переменная 2
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2
 	public int getDbgvarDat_var2() {
 		
 		
@@ -382,7 +382,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_DBGVAR_DAT
-	//переменная 3
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 3
 	public int getDbgvarDat_var3() {
 		
 		
@@ -390,7 +390,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_DBGVAR_DAT
-	//переменная 4
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 4
 	public int getDbgvarDat_var4() {
 		
 		
@@ -398,7 +398,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_FNNAME_DAT
-	//Общее кол-во наборов (семейств характеристик)
+	//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 	public int getFnTables_num() {
 		
 		
@@ -406,7 +406,7 @@ public class SECU3Packet {
 	}
 	
 	//Parse_FNNAME_DAT
-	//номер этого набора характеристик
+	//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public int getFnIndex() {
 		
 		
@@ -414,14 +414,23 @@ public class SECU3Packet {
 	}
 	
 	//Parse_FNNAME_DAT
-	//имя этого набора характеристик
+	//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public String getFnName() {
 
 		
 		return "";
 	}
 	
+<<<<<<< HEAD
 	public String getSymbolOfPacketType(Packets pc) { return pc.packetCodeSymbols(); }
+=======
+	public String getSymbolOfPacketType(Packets pc) {
+		int order=pc.ordinal();
+		String outputString;
+		outputString=packetCodeSymbols[order];
+		return pc.packetCodeSymbols();
+	}
+>>>>>>> remotes/origin/master
 	
 
 	
