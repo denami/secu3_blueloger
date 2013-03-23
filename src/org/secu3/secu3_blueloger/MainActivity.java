@@ -1,4 +1,4 @@
-package org.secu3.secu3_blueloger;
+п»їpackage org.secu3.secu3_blueloger;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 	private static final int REQUEST_CODE = 10;
 	
 	//clean Button 
-	// Кнопка для очистки
+	// РљРЅРѕРїРєР° РґР»СЏ РѕС‡РёСЃС‚РєРё
 	Button btnConnect;
 	TextView txtLod;    
 	
@@ -43,18 +43,18 @@ public class MainActivity extends Activity {
 	private BluetoothAdapter btAdapter = null;  
 	private BluetoothSocket btSocket = null;
 	
-	// Статус для Handler
+	// РЎС‚Р°С‚СѓСЃ РґР»СЏ Handler
 	// Status  for Handler
 	final int RECIEVE_MESSAGE = 1;
 	
 	//private static final int REQUEST_CONNECT_DEVICE = 1;
 	
 	// SPP UUID service
-	// SPP UUID сервиса
+	// SPP UUID СЃРµСЂРІРёСЃР°
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	
 	// MAC-address of Bluetooth module (you must edit this line)
-	// MAC-адрес Bluetooth модуля
+	// MAC-Р°РґСЂРµСЃ Bluetooth РјРѕРґСѓР»СЏ
 	private static String address = "00:12:03:30:00:23";
 	
 	private ConnectedThread mConnectedThread;
@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
 		case 6:
 			Log.d(TAG, "Exit from application");
 			//Exit from application
-			//Выход из приложения (сворачивание приложения)
+			//Р’С‹С…РѕРґ РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ (СЃРІРѕСЂР°С‡РёРІР°РЅРёРµ РїСЂРёР»РѕР¶РµРЅРёСЏ)
 			finish();
 			break;
 		default:
@@ -136,22 +136,22 @@ public class MainActivity extends Activity {
 	      });
 		
 		// for display the received data from the Secu3
-		// для вывода текста, полученного от Secu3
+		// РґР»СЏ РІС‹РІРѕРґР° С‚РµРєСЃС‚Р°, РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ РѕС‚ Secu3
 		txtLod = (TextView) findViewById(R.id.textViewLog);
 		txtLod.setText("Data from SECU: " ); 
 	    h = new Handler() {
 	    	public void handleMessage(android.os.Message msg) {
 	    		switch (msg.what) {
-	            case RECIEVE_MESSAGE:													// if receive massage / если приняли сообщение в Handler
-	            	String strIncom = (String)msg.obj;							        // extract string / то извлекаем строку												
-	            	txtLod.setText(strIncom); 	       								// update TextView / Обновляем TextView с логом
+	            case RECIEVE_MESSAGE:													// if receive massage / РµСЃР»Рё РїСЂРёРЅСЏР»Рё СЃРѕРѕР±С‰РµРЅРёРµ РІ Handler
+	            	String strIncom = (String)msg.obj;							        // extract string / С‚Рѕ РёР·РІР»РµРєР°РµРј СЃС‚СЂРѕРєСѓ												
+	            	txtLod.setText(strIncom); 	       								// update TextView / РћР±РЅРѕРІР»СЏРµРј TextView СЃ Р»РѕРіРѕРј
 	            	Log.d(TAG, "...strIncom:" + strIncom + "...");
 	            	break;
 	    		}
 	    	}
 	    };
-	    btAdapter = BluetoothAdapter.getDefaultAdapter();								// get Bluetooth adapter / получаем локальный Bluetooth адаптер
-	    checkBTState();																	// Check Bluetooth / Проверяем наличие Bluetooth адаптера
+	    btAdapter = BluetoothAdapter.getDefaultAdapter();								// get Bluetooth adapter / РїРѕР»СѓС‡Р°РµРј Р»РѕРєР°Р»СЊРЅС‹Р№ Bluetooth Р°РґР°РїС‚РµСЂ
+	    checkBTState();																	// Check Bluetooth / РџСЂРѕРІРµСЂСЏРµРј РЅР°Р»РёС‡РёРµ Bluetooth Р°РґР°РїС‚РµСЂР°
 	}
 
 	@Override  
@@ -171,10 +171,10 @@ public class MainActivity extends Activity {
 		}
 		btAdapter.cancelDiscovery();
 		// Establish the connection.  This will block until it connects.
-		Log.d(TAG, "...Соединяемся...");
+		Log.d(TAG, "...РЎРѕРµРґРёРЅСЏРµРјСЃСЏ...");
 		try {
 			btSocket.connect();
-			Log.d(TAG, "...Соединение установлено и готово к передачи данных...");   
+			Log.d(TAG, "...РЎРѕРµРґРёРЅРµРЅРёРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРѕ Рё РіРѕС‚РѕРІРѕ Рє РїРµСЂРµРґР°С‡Рё РґР°РЅРЅС‹С…...");   
 		} catch (IOException e) { 
 			try {
 				btSocket.close(); 
@@ -183,7 +183,7 @@ public class MainActivity extends Activity {
 			}    
 		}
 		// Create a data stream so we can talk to server.
-		Log.d(TAG, "...Создание Socket...");
+		Log.d(TAG, "...РЎРѕР·РґР°РЅРёРµ Socket...");
 		mConnectedThread = new ConnectedThread(btSocket);
 		mConnectedThread.start();
 		
@@ -257,7 +257,7 @@ public class MainActivity extends Activity {
 	private class ConnectedThread extends Thread {
 		private final InputStream mmInStream;
 		private final OutputStream mmOutStream;    
-		private StringBuilder sbInThread = new StringBuilder(); // StringBuilder для отправки TextView
+		private StringBuilder sbInThread = new StringBuilder(); // StringBuilder РґР»СЏ РѕС‚РїСЂР°РІРєРё TextView
 		public ConnectedThread(BluetoothSocket socket) {
 			InputStream tmpIn = null;
 			OutputStream tmpOut = null;
@@ -286,7 +286,7 @@ public class MainActivity extends Activity {
 			ArrayList<String> resultingList = new ArrayList<String>();
 			String container;
 			//Create one element array 
-			// Создание масива из одного байта
+			// РЎРѕР·РґР°РЅРёРµ РјР°СЃРёРІР° РёР· РѕРґРЅРѕРіРѕ Р±Р°Р№С‚Р°
 			byte[] t = new byte [1]; 
 			
 			// Keep listening to the InputStream until an exception occurs
@@ -299,19 +299,19 @@ public class MainActivity extends Activity {
 					// Read from the InputStrea
 					bytes = mmInStream.read(buffer);		// Get number of bytes and message in "buffer"					
 					for (int i = 0; i < bytes; i++) {
-						t[0]=buffer[i]; //Set array element from buffer / Устанавливаем заничение элемента значением из buffer 
-						container = new String(t);  // create string from bytes array / Создаем строку из байт в буфере
+						t[0]=buffer[i]; //Set array element from buffer / РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р·Р°РЅРёС‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° Р·РЅР°С‡РµРЅРёРµРј РёР· buffer 
+						container = new String(t);  // create string from bytes array / РЎРѕР·РґР°РµРј СЃС‚СЂРѕРєСѓ РёР· Р±Р°Р№С‚ РІ Р±СѓС„РµСЂРµ
 						//Log.d(TAG, "Buffer elemrnt: "+i+"-"+buffer[i]);
 						sbInThread.append(container);
-						if (buffer[i]==13) { // determine the end-of-line / определяем символ конца строки
+						if (buffer[i]==13) { // determine the end-of-line / РѕРїСЂРµРґРµР»СЏРµРј СЃРёРјРІРѕР» РєРѕРЅС†Р° СЃС‚СЂРѕРєРё
 							// if end-of-line,  
-							// если встречаем конец строки,
+							// РµСЃР»Рё РІСЃС‚СЂРµС‡Р°РµРј РєРѕРЅРµС† СЃС‚СЂРѕРєРё,
 							Log.d(TAG, "New message"); 
 							//get current time
-							// получаем текущее время
+							// РїРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰РµРµ РІСЂРµРјСЏ
 						    final Calendar c = Calendar.getInstance();
-							resultingList.add(c.getTime().toString()+": "+sbInThread.toString()); //Add string to ArrayList / Добовляем строку в ArrayList 
-							sbInThread = new StringBuilder(); //clear StringBuilder / и очищаем StringBuilder
+							resultingList.add(c.getTime().toString()+": "+sbInThread.toString()); //Add string to ArrayList / Р”РѕР±РѕРІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ ArrayList 
+							sbInThread = new StringBuilder(); //clear StringBuilder / Рё РѕС‡РёС‰Р°РµРј StringBuilder
 						}
 					}
 					for (String strToPush: resultingList) {
@@ -320,7 +320,7 @@ public class MainActivity extends Activity {
 						h.obtainMessage(RECIEVE_MESSAGE, strToPush).sendToTarget(); 
 					}
 					//clear ArrayList  
-					//очищаем ArrayList
+					//РѕС‡РёС‰Р°РµРј ArrayList
 					resultingList.clear();
 					wrt.flush();
 					wrt.close();     
