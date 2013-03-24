@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
 	    btnConnect.setOnClickListener(new OnClickListener() {
 	        public void onClick(View v) {
 	        txtLod.setText("");
-	      	mConnectedThread.write("1");	// Send "1" via Bluetooth
+	      	mConnectedThread.write("!ho\r");	// Switch to "engine start parameters"
 	        }
 	      });
 		
