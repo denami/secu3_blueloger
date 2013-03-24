@@ -37,42 +37,48 @@ public class SECU3Packet {
 	}
 	
 	public enum Packets {
-		CHANGEMODE 	 (1, "h"),	//!< change mode (type of default packet)
-		BOOTLOADER 	 (1, "i"),	//!< start boot loader
-		TEMPER_PAR 	 (12, "j"),	//!< temperature parameters (coolant sensor, engine cooling etc)
-		CARBUR_PAR 	 (26, "k"),	//!< carburetor's parameters
-		IDLREG_PAR 	 (30, "l"),	//!< idling regulator parameters
-		ANGLES_PAR 	 (22, "m"),	//!< advance angle (ign. timing) parameters
-		FUNSET_PAR 	 (29, "n"),	//!< parametersrelated to set of functions (lookup tables)
-		STARTR_PAR 	 (9, "o"),	//!< engine start parameters
-		FNNAME_DAT 	 (21,"p"),	//!< used for transfering of names of set of functions (lookup tables)
-		SENSOR_DAT 	 (47,"q"),	//!< used for transfering of sensors data //SENSOR_DAT example string @q0000030012CC02650000000000000013 	
-		ADCCOR_PAR 	 (73,"r"),	//!< parameters related to ADC corrections
-		ADCRAW_DAT 	 (29,"s"),	//!< used for transfering 'raw" values directly from ADC
-		CKPS_PAR	 (14,"t"),	//!< CKP sensor parameters
-		OP_COMP_NC 	 (5,"u"),	//!< used to indicate that specified (suspended) operation completed
-		CE_ERR_CODES (5,"v"),	//!< used for transfering of CE codes
-		KNOCK_PAR 	 (14+18,"w"),	//!< parameters related to knock detection and knock chip
-		CE_SAVED_ERR (5,"x"),	//!< used for transfering of CE codes stored in the EEPROM
-		FWINFO_DAT 	 (1,"y"),	//!< used for transfering information about firmware
-		MISCEL_PAR 	 (16,"z"),	//!< miscellaneous parameters
-		EDITAB_PAR 	 (1,"{"),	//!< used for transferring of data for realtime tables editing
-		ATTTAB_PAR 	 (1,"}"),	//!< used for transferring of attenuator map (knock detection related)
-		DBGVAR_DAT 	 (17,":"),	//!< for watching of firmware variables (used for debug purposes)
-		DIAGINP_DAT  (35,"="),	//!< diagnostics: send input values (analog & digital values)
-		DIAGOUT_DAT  (1,"^"),	//!< diagnostics: receive output states (bits)
-		CHOKE_PAR 	 (6,"%");	//!< parameters  related to choke control
+		// String packet symbol, int min lenght, int max lenght,
+		CHANGEMODE 	 ("h",1,1,true ),	//!< change mode (type of default packet) //no data need, only a descriptor
+		BOOTLOADER 	 ("i",0,0,true ),		//!< start boot loader  //no data need
+		TEMPER_PAR 	 ("j",12,12,false),	//!< temperature parameters (coolant sensor, engine cooling etc)
+		CARBUR_PAR 	 ("k",26,26,false),	//!< carburetor's parameters
+		IDLREG_PAR 	 ("l",30,30,false),	//!< idling regulator parameters
+		ANGLES_PAR 	 ("m",22,22,false),	//!< advance angle (ign. timing) parameters
+		FUNSET_PAR 	 ("n",29,29,false),	//!< parametersrelated to set of functions (lookup tables)
+		STARTR_PAR 	 ("o",9,9,false),		//!< engine start parameters
+		FNNAME_DAT 	 ("p",21,21,false),	//!< used for transfering of names of set of functions (lookup tables)
+		SENSOR_DAT 	 ("q",47,47,false),	//!< used for transfering of sensors data //SENSOR_DAT example string @q0000030012CC02650000000000000013 	
+		ADCCOR_PAR 	 ("r",73,73,false),	//!< parameters related to ADC corrections
+		ADCRAW_DAT 	 ("s",29,29,false),	//!< used for transfering 'raw" values directly from ADC
+		CKPS_PAR	 ("t",14,14,false),	//!< CKP sensor parameters
+		OP_COMP_NC 	 ("u",5,5,false),		//!< used to indicate that specified (suspended) operation completed
+		CE_ERR_CODES ("v",5,5,false),		//!< used for transfering of CE codes
+		KNOCK_PAR 	 ("w",32,32,false),	//!< parameters related to knock detection and knock chip
+		CE_SAVED_ERR ("x",5,5,false),		//!< used for transfering of CE codes stored in the EEPROM
+		FWINFO_DAT 	 ("y",1,1,false),		//!< used for transfering information about firmware  //TODO  UPDATE
+		MISCEL_PAR 	 ("z",16,16,false),	//!< miscellaneous parameters
+		EDITAB_PAR 	 ("{",7,37,false),		//!< used for transferring of data for realtime tables editing
+		ATTTAB_PAR 	 ("}",5,35,false),		//!< used for transferring of attenuator map (knock detection related)
+		DBGVAR_DAT 	 (":",17,17,false),	//!< for watching of firmware variables (used for debug purposes)
+		DIAGINP_DAT  ("=",35,35,false),	//!< diagnostics: send input values (analog & digital values)
+		DIAGOUT_DAT  ("^",1,1,true),		//!< diagnostics: receive output states (bits)
+		CHOKE_PAR 	 ("%",6,6,false);		//!< parameters  related to choke control
 		
-	    private final int packetLength;   //размер пакета без сигнального символа, дескриптора 	
+	    private final int packetLengthMin;   //Минисмальный размер пакета без сигнального символа, дескриптора
+	    private final int packetLengthMax;   //Максимальный размер пакета без сигнального символа, дескриптора
 	    private final String packetCodeSymbols; // Символ типа пакета	
-   
-	    Packets(int packetLength, String packetCodeSymbols) {
-	        this.packetLength = packetLength;
-	        this.packetCodeSymbols=packetCodeSymbols;
+	    private final Boolean pachetIsOnlyTransfer;
+	    Packets(String packetCodeSymbols, int packetLengthMin, int packetLengthMax, Boolean pachetIsOnlyTransfer) {
+	        this.packetLengthMin = packetLengthMin;
+	        this.packetLengthMax = packetLengthMax;
+	        this.packetCodeSymbols = packetCodeSymbols;
+	        this.pachetIsOnlyTransfer = pachetIsOnlyTransfer;
 	    }
 		
-	    private int packetLength() { return packetLength; }
-	    private String packetCodeSymbols() {return packetCodeSymbols; }
+	    private int packetLengthMin() 		{ return packetLengthMin; }
+	    private int packetLengthMax() 		{ return packetLengthMax; }
+	    private String packetCodeSymbols() 	{return packetCodeSymbols; }
+	    private Boolean isOnlyTransfer() 	{return pachetIsOnlyTransfer; }
 		
 	}
 	@Deprecated
@@ -162,8 +168,10 @@ public class SECU3Packet {
 		Packets p =  Packets.SENSOR_DAT;
 		int t = packetlength[4];
 		Log.d(TAG, "...PacketString: " + p.name() + "...");
-		Log.d(TAG, "...Packet Length: " + p.packetLength() + "...");
+		Log.d(TAG, "...Packet Length: " + p.packetLengthMin() + "...");
+		Log.d(TAG, "...Packet Length Max: " + p.packetLengthMax() + "...");
 		Log.d(TAG, "...Packet CodeSymbols: " + p.packetCodeSymbols() + "...");
+		Log.d(TAG, "...Packet isOnlyTransfer: " + p. isOnlyTransfer() + "...");
 		Log.d(TAG, "...test: " + t + "...");
 	}
 	
