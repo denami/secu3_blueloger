@@ -18,7 +18,7 @@ public class SECU3Packet {
 		IDLREG_PAR 	 ("l",30,30,false),		//!< idling regulator parameters
 		ANGLES_PAR 	 ("m",22,22,false),		//!< advance angle (ign. timing) parameters
 		FUNSET_PAR 	 ("n",29,29,false),		//!< parametersrelated to set of functions (lookup tables)
-		STARTR_PAR 	 ("o",9,9,false),		//!< engine start parameters
+		STARTR_PAR 	 ("o",9,9,false),		//!< engine start parameters //STARTR_PAR example string @o0258028A
 		FNNAME_DAT 	 ("p",21,21,false),		//!< used for transfering of names of set of functions (lookup tables)
 		SENSOR_DAT 	 ("q",47,47,false),		//!< used for transfering of sensors data //SENSOR_DAT example string @q0000030012CC02650000000000000013 	
 		ADCCOR_PAR 	 ("r",73,73,false),		//!< parameters related to ADC corrections
@@ -60,6 +60,9 @@ public class SECU3Packet {
 		Packet=p;
 	}
 	
+	SECU3Packet() {
+	}
+	
 	SECU3Packet(String PacketStrOnCreate) {
 		PacketStr=PacketStrOnCreate;
 		Log.d(TAG, "...PacketString: " + PacketStr + "...");
@@ -69,6 +72,7 @@ public class SECU3Packet {
 		Log.d(TAG, "...Packet Length Max: " + p.packetLengthMax() + "...");
 		Log.d(TAG, "...Packet CodeSymbols: " + p.packetCodeSymbols() + "...");
 		Log.d(TAG, "...Packet isOnlyTransfer: " + p. isOnlyTransfer() + "...");
+		Packet=Packets.SENSOR_DAT;
 	}
 	
 	public String toString() {
@@ -77,6 +81,7 @@ public class SECU3Packet {
 	
 	public boolean setString(String PacketStrOnSet ) {
 		PacketStr=PacketStrOnSet;
+		Packet=Packets.SENSOR_DAT;
 		return true;
 	}
 	

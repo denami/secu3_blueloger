@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
 	//clean Button 
 	// Кнопка для очистки
 	Button btnConnect;
+	Button btnSENSOR_DAT;
 	TextView txtLod;    
 	
 	Handler h;	
@@ -127,13 +128,25 @@ public class MainActivity extends Activity {
 		
 		btnConnect = (Button) findViewById(R.id.buttonconnect);
 		
+		btnSENSOR_DAT = (Button) findViewById(R.id.buttoTextSENSOR_DAT);
+		
 	    btnConnect.setOnClickListener(new OnClickListener() {
 	        public void onClick(View v) {
 	        txtLod.setText("");
 	      	mConnectedThread.write("!ho\r");	// Switch to "engine start parameters"
+	      	Log.d(TAG, "...write to Thread: " + "!ho\r" + "...");
 	        }
 	      });
 		
+	    btnSENSOR_DAT.setOnClickListener(new OnClickListener() {
+	        public void onClick(View v) {
+	        txtLod.setText("");
+	      	mConnectedThread.write("!hq\r");	// Switch to "transfering of sensors data"
+	      	Log.d(TAG, "...write to Thread: " + "!hq\r" + "...");
+	        }
+	      });
+	    
+	    
 		// for display the received data from the Secu3
 		// для вывода текста, полученного от Secu3
 		txtLod = (TextView) findViewById(R.id.textViewLog);
@@ -194,10 +207,10 @@ public class MainActivity extends Activity {
 		txtLod.setText(S3Packet.getSymbolOfPacketType(testPacket));
 
 		
-		S3Packet = new SECU3Packet("@q0000030012CC02650000000000000013");
-		//S3Packet.getPacketCode();
-		String str = S3Packet.getPacketCode().name();
-		txtLod.setText(str);
+		//S3Packet = new SECU3Packet("@q0000030012CC02650000000000000013");
+		
+		//String str = S3Packet.getPacketCode().name();
+		//txtLod.setText(str);
 		
 
 		
@@ -305,7 +318,9 @@ public class MainActivity extends Activity {
 						if (buffer[i]==13) { // determine the end-of-line / определяем символ конца строки
 							// if end-of-line,  
 							// если встречаем конец строки,
-							Log.d(TAG, "New message"); 
+							
+							//Log.d(TAG, "New message"); 
+							
 							//get current time
 							// получаем текущее время
 						    final Calendar c = Calendar.getInstance();

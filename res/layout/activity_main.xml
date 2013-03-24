@@ -27,4 +27,20 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textViewLog" />
 
+    <Button
+        android:id="@+id/buttoTextSENSOR_DAT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/buttoTextSENSOR_DAT" />
+
+    <Button
+        android:id="@+id/buttoTextSTARTR_PAR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/buttoTextSENSOR_DAT"
+        android:text="@string/buttoTextSTARTR_PAR" />
+
 </RelativeLayout>
