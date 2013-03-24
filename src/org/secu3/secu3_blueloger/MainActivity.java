@@ -125,7 +125,6 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		Log.d(TAG, "...PackageName: " + getFilesDir().toString() + "...");
 		
-		
 		btnConnect = (Button) findViewById(R.id.buttonconnect);
 		
 	    btnConnect.setOnClickListener(new OnClickListener() {
@@ -190,7 +189,7 @@ public class MainActivity extends Activity {
 		SECU3Packet.Packets testPacket = SECU3Packet.Packets.SENSOR_DAT;
 		
 		txtLod = (TextView) findViewById(R.id.debugTextView);		
-		SECU3Packet S3Packet = new SECU3Packet();
+		SECU3Packet S3Packet = new SECU3Packet(testPacket);
 
 		txtLod.setText(S3Packet.getSymbolOfPacketType(testPacket));
 

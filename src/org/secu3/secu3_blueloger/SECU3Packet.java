@@ -56,8 +56,8 @@ public class SECU3Packet {
 		
 	}
 	
-	SECU3Packet() {
-		
+	SECU3Packet(Packets p) {
+		Packet=p;
 	}
 	
 	SECU3Packet(String PacketStrOnCreate) {
