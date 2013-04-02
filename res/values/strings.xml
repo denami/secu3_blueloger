@@ -13,8 +13,8 @@
     <string name="exitButtonText">Exit</string>
     <string name="changePathToLogFile">Change log file</string>
     <string name="choseAdaptorButtonText">Chose devise</string>
-    <string name="_sdcard_test_log">/sdcard/test.log</string>
-    <string name="Secu3LogFileName">secu3.log</string>
+    <string name="_sdcard_test_log">/sdcard/test.txt</string>
+    <string name="Secu3LogFileName">secu3.txt</string>
     <string name="buttoTextSENSOR_DAT">SENSOR_DAT</string>
     <string name="buttoTextSTARTR_PAR">STARTR_PAR</string>
     <string name="buttoTextTEMPER_PAR">TEMPER_PAR</string>
