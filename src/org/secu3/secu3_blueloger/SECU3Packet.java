@@ -210,6 +210,7 @@ public class SECU3Packet {
 	//Данные из ControlApp.cpp
 	//Parse_SENSOR_DAT
 	//Состояние клапана ЭМР
+	//TODO add function
 	public boolean getEpm_valve() {
 		
 		
@@ -219,6 +220,7 @@ public class SECU3Packet {
 	//Данные из ControlApp.cpp
 	//Parse_SENSOR_DAT
 	//Состояние лампы "CE"
+	//TODO add function
 	public boolean getCe_state() {
 		
 		
@@ -228,6 +230,7 @@ public class SECU3Packet {
 	//Данные из ControlApp.cpp
 	//Parse_SENSOR_DAT
 	//Состояние вентилятора
+	//TODO add function
 	public boolean getCool_fan() {
 		
 		
@@ -237,6 +240,7 @@ public class SECU3Packet {
 	//Данные из ControlApp.cpp
 	//Parse_SENSOR_DAT
 	//Состояние реле блокировки стартера
+	//TODO add function
 	public boolean getSt_block() {
 			
 			
@@ -245,6 +249,7 @@ public class SECU3Packet {
 	
 	//Parse_SENSOR_DAT
 	//TPS sensor
+	//TODO add function
 	public int getTps() {
 		
 		return 0;
@@ -252,6 +257,7 @@ public class SECU3Packet {
 	
 	//Parse_SENSOR_DAT
 	//ADD_I1 input
+	//TODO add function
 	public int getAdd_i1_v() {
 		
 		
@@ -260,6 +266,7 @@ public class SECU3Packet {
 	
 	//Parse_SENSOR_DAT
 	//ADD_I2 input
+	//TODO add function
 	public int getAdd_i2_v() {
 		
 		return 0;
@@ -267,6 +274,7 @@ public class SECU3Packet {
 	
 	//Parse_SENSOR_DAT
 	//Биты ошибок СЕ
+	//TODO add function
 	public int getCe_errors() {
 		
 		
@@ -275,6 +283,7 @@ public class SECU3Packet {
 	
 	//Parse_DBGVAR_DAT
 	//переменная 1
+	//TODO add function
 	public int getDbgvarDat_var1() {
 		
 		
@@ -283,6 +292,7 @@ public class SECU3Packet {
 	
 	//Parse_DBGVAR_DAT
 	//переменная 2
+	//TODO add function
 	public int getDbgvarDat_var2() {
 		
 		return 0;
