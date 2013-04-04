@@ -56,7 +56,8 @@ public class MainActivity extends Activity {
 	
 	// MAC-address of Bluetooth module (you must edit this line)
 	// MAC-адрес Bluetooth модуля
-	private static String address = "00:12:03:30:00:23";
+	//private static String address = "00:12:03:30:00:23";
+	private static String address = "00:00:00:00:00:00";
 	
 	private ConnectedThread mConnectedThread;
 	
@@ -98,13 +99,14 @@ public class MainActivity extends Activity {
 				 File path = Environment.getExternalStoragePublicDirectory(
 				            Environment.DIRECTORY_DOWNLOADS);
 
-
 				txtLod.setText( path.toString()+"/"+data.getExtras().getString("lofFilePath")+"_"+getFilesDir().toString() ); 
 			}
 			
 			if (data.hasExtra("bluDevName")) {
-
 				txtLod.setText(data.getExtras().getString("bluDevName"));
+				String[] bluDevStringName = data.getExtras().getString("bluDevName").split("_");
+				address=bluDevStringName[bluDevStringName.length-1];
+				Log.d(TAG, "... new remote device address "+address+" ...");
 			}
 		}
 	}
