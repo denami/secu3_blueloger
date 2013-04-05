@@ -224,7 +224,7 @@ public class MainActivity extends Activity {
 		
 		// Create a data stream so we can talk to server.
 		Log.d(TAG, "...Создание Socket...");
-		mConnectedThread = new ConnectedThread(btSocket,pathToLogFileOnTheFileSystem);
+		mConnectedThread = new ConnectedThread(btSocket,toLogFile);
 		mConnectedThread.start();
 		
 		SECU3Packet.Packets testPacket = SECU3Packet.Packets.SENSOR_DAT;
@@ -293,13 +293,19 @@ public class MainActivity extends Activity {
 	  
 	private class ConnectedThread extends Thread {
 		private final InputStream mmInStream;
-		private final OutputStream mmOutStream;    
-		String pathToLogFile;
+		private final OutputStream mmOutStream; 
+
+		//File pathToDirectoryDownload = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+		//private File toLogFile = new File (pathToDirectoryDownload+"/"+"test"+getString(R.string.Secu3LogFileName));
+		private File toLogFile = new File (getString(R.string._sdcard_test_log));
+		
 		private StringBuilder sbInThread = new StringBuilder(); // StringBuilder для отправки TextView
-		public ConnectedThread(BluetoothSocket socket, String pathLogFile) {
+		
+			public ConnectedThread(BluetoothSocket socket,File toLogFileSetted) {	
+			super();
 			InputStream tmpIn = null;
 			OutputStream tmpOut = null;
-			pathToLogFile=pathLogFile;
+			toLogFile=toLogFileSetted;
 			// Get the input and output streams, using temp objects because
 			// member streams are final
 			try {
@@ -315,7 +321,7 @@ public class MainActivity extends Activity {
 		//File toLogFile = new File (getString(R.string._sdcard_test_log));
 		
 		//File toLogFile = new File (pathToDirectoryDownload+"/"+getString(R.string.Secu3LogFileName));
-		File toLogFile = new File(pathToLogFile);
+		//File toLogFile = new File(pathToLogFile);
 		
 		public void run() {
 			byte[] buffer = new byte[256];  // buffer store for the stream
