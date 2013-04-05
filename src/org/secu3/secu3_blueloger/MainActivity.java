@@ -35,10 +35,16 @@ public class MainActivity extends Activity {
 	private static final int REQUEST_CODE = 10;
 	
 	//clean Button 
-	// Кнопка для очистки
+	//Кнопка для очистки
 	Button btnConnect;
+	
+	//Button switch to SENSOR_DAT
 	Button btnSENSOR_DAT;
+	//Button switch to STARTR_PAR
+	Button btnSTARTR_PAR;
+	
 	TextView txtLod;    
+	TextView txtPathToLogFileOnTheFileSystem;
 	
 	Handler h;	
 	private BluetoothAdapter btAdapter = null;  
@@ -130,9 +136,17 @@ public class MainActivity extends Activity {
 		
 		btnConnect = (Button) findViewById(R.id.buttonconnect);
 		
+		btnSTARTR_PAR = (Button) findViewById(R.id.buttoTextSTARTR_PAR);
+		
 		btnSENSOR_DAT = (Button) findViewById(R.id.buttoTextSENSOR_DAT);
 		
 	    btnConnect.setOnClickListener(new OnClickListener() {
+	        public void onClick(View v) {
+	        txtLod.setText("");
+	        }
+	      });
+	    
+	    btnSTARTR_PAR.setOnClickListener(new OnClickListener() {
 	        public void onClick(View v) {
 	        txtLod.setText("");
 	      	mConnectedThread.write("!ho\r");	// Switch to "engine start parameters"
@@ -147,7 +161,6 @@ public class MainActivity extends Activity {
 	      	Log.d(TAG, "...write to Thread: " + "!hq\r" + "...");
 	        }
 	      });
-	    
 	    
 		// for display the received data from the Secu3
 		// для вывода текста, полученного от Secu3
@@ -208,14 +221,23 @@ public class MainActivity extends Activity {
 
 		txtLod.setText(S3Packet.getSymbolOfPacketType(testPacket));
 
-		
 		//S3Packet = new SECU3Packet("@q0000030012CC02650000000000000013");
 		
 		//String str = S3Packet.getPacketCode().name();
 		//txtLod.setText(str);
 		
-
+		File pathToDirectoryDownload = Environment.getExternalStoragePublicDirectory(
+	            Environment.DIRECTORY_DOWNLOADS);
 		
+		//File toLogFile = new File (getString(R.string._sdcard_test_log));
+		
+		File toLogFile = new File (pathToDirectoryDownload+"/"+getString(R.string.Secu3LogFileName));
+		
+		String pathToLogFileOnTheFileSystem = toLogFile.getPath();
+		
+		txtPathToLogFileOnTheFileSystem = (TextView) findViewById(R.id.pathtoLogFile);
+		txtPathToLogFileOnTheFileSystem.setText(pathToLogFileOnTheFileSystem);
+
 	}
 	 
 	private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
@@ -292,7 +314,6 @@ public class MainActivity extends Activity {
 		//File toLogFile = new File (getString(R.string._sdcard_test_log));
 		
 		File toLogFile = new File (pathToDirectoryDownload+"/"+getString(R.string.Secu3LogFileName));
-		
 		
 		public void run() {
 			byte[] buffer = new byte[256];  // buffer store for the stream

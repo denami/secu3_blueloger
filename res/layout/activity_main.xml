@@ -43,4 +43,13 @@
         android:layout_toRightOf="@+id/buttoTextSENSOR_DAT"
         android:text="@string/buttoTextSTARTR_PAR" />
 
+    <TextView
+        android:id="@+id/pathtoLogFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/debugTextView"
+        android:text="TextView" />
+
 </RelativeLayout>
