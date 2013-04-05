@@ -209,9 +209,22 @@ public class MainActivity extends Activity {
 				errorExit("Fatal Error", "In onResume() and unable to close socket during connection failure" + e2.getMessage() + "."); 
 			}    
 		}
+		
+		File pathToDirectoryDownload = Environment.getExternalStoragePublicDirectory(
+	            Environment.DIRECTORY_DOWNLOADS);
+		
+		//File toLogFile = new File (getString(R.string._sdcard_test_log));
+		
+		File toLogFile = new File (pathToDirectoryDownload+"/"+getString(R.string.Secu3LogFileName));
+		
+		String pathToLogFileOnTheFileSystem = toLogFile.getPath();
+		
+		txtPathToLogFileOnTheFileSystem = (TextView) findViewById(R.id.pathtoLogFile);
+		txtPathToLogFileOnTheFileSystem.setText(pathToLogFileOnTheFileSystem);
+		
 		// Create a data stream so we can talk to server.
 		Log.d(TAG, "...Создание Socket...");
-		mConnectedThread = new ConnectedThread(btSocket);
+		mConnectedThread = new ConnectedThread(btSocket,pathToLogFileOnTheFileSystem);
 		mConnectedThread.start();
 		
 		SECU3Packet.Packets testPacket = SECU3Packet.Packets.SENSOR_DAT;
@@ -226,18 +239,6 @@ public class MainActivity extends Activity {
 		//String str = S3Packet.getPacketCode().name();
 		//txtLod.setText(str);
 		
-		File pathToDirectoryDownload = Environment.getExternalStoragePublicDirectory(
-	            Environment.DIRECTORY_DOWNLOADS);
-		
-		//File toLogFile = new File (getString(R.string._sdcard_test_log));
-		
-		File toLogFile = new File (pathToDirectoryDownload+"/"+getString(R.string.Secu3LogFileName));
-		
-		String pathToLogFileOnTheFileSystem = toLogFile.getPath();
-		
-		txtPathToLogFileOnTheFileSystem = (TextView) findViewById(R.id.pathtoLogFile);
-		txtPathToLogFileOnTheFileSystem.setText(pathToLogFileOnTheFileSystem);
-
 	}
 	 
 	private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
@@ -293,10 +294,12 @@ public class MainActivity extends Activity {
 	private class ConnectedThread extends Thread {
 		private final InputStream mmInStream;
 		private final OutputStream mmOutStream;    
+		String pathToLogFile;
 		private StringBuilder sbInThread = new StringBuilder(); // StringBuilder для отправки TextView
-		public ConnectedThread(BluetoothSocket socket) {
+		public ConnectedThread(BluetoothSocket socket, String pathLogFile) {
 			InputStream tmpIn = null;
 			OutputStream tmpOut = null;
+			pathToLogFile=pathLogFile;
 			// Get the input and output streams, using temp objects because
 			// member streams are final
 			try {
@@ -307,13 +310,12 @@ public class MainActivity extends Activity {
 			mmOutStream = tmpOut;    
 		}
 		
-		
-		File pathToDirectoryDownload = Environment.getExternalStoragePublicDirectory(
-	            Environment.DIRECTORY_DOWNLOADS);
+		//File pathToDirectoryDownload = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 		
 		//File toLogFile = new File (getString(R.string._sdcard_test_log));
 		
-		File toLogFile = new File (pathToDirectoryDownload+"/"+getString(R.string.Secu3LogFileName));
+		//File toLogFile = new File (pathToDirectoryDownload+"/"+getString(R.string.Secu3LogFileName));
+		File toLogFile = new File(pathToLogFile);
 		
 		public void run() {
 			byte[] buffer = new byte[256];  // buffer store for the stream
