@@ -50,6 +50,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/debugTextView"
-        android:text="TextView" />
+        android:text="" />
+
+    <Button
+        android:id="@+id/buttonCE_ERR_CODES"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttoTextSENSOR_DAT"
+        android:layout_alignParentLeft="true"
+        android:text="CE_ERR_CODES" />
 
 </RelativeLayout>

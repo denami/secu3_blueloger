@@ -42,6 +42,8 @@ public class MainActivity extends Activity {
 	Button btnSENSOR_DAT;
 	//Button switch to STARTR_PAR
 	Button btnSTARTR_PAR;
+	//Button switch to CE_ERR_CODES
+	Button btnCE_ERR_CODES;
 	
 	TextView txtLod;    
 	TextView txtPathToLogFileOnTheFileSystem;
@@ -140,6 +142,8 @@ public class MainActivity extends Activity {
 		
 		btnSENSOR_DAT = (Button) findViewById(R.id.buttoTextSENSOR_DAT);
 		
+		btnCE_ERR_CODES = (Button) findViewById(R.id.buttonCE_ERR_CODES);
+		
 	    btnConnect.setOnClickListener(new OnClickListener() {
 	        public void onClick(View v) {
 	        txtLod.setText("");
@@ -161,6 +165,15 @@ public class MainActivity extends Activity {
 	      	Log.d(TAG, "...write to Thread: " + "!hq\r" + "...");
 	        }
 	      });
+	    
+	    btnCE_ERR_CODES.setOnClickListener(new OnClickListener() {
+	        public void onClick(View v) {
+	        txtLod.setText("");
+	      	mConnectedThread.write("!hv\r");	// Switch to "transfering of Errors data"
+	      	Log.d(TAG, "...write to Thread: " + "!hv\r" + "...");
+	        }
+	      });
+	    
 	    
 		// for display the received data from the Secu3
 		// для вывода текста, полученного от Secu3
